@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5 h-100" style="width:65%;">
+
+  <!-- Section: Block Content -->
+  <section>
+
+    <div class="card">
+      <div class="card-body">
+
+        <h5 class="text-center font-weight-bold mb-4">Mes annonces</h5>
+
+        <hr>
+
+        <!--Grid row-->
+        <div class="row">
+
+          <!--Grid column-->
+          <div class="col-12 mb-3 mx-auto">
+            {% for i in annonce %}
+            <div class="media">
+
+              <div class="media-body">
+                <h6 class="mt-1 font-weight-bold ml-3"><a href="#!">{{i.article}}</a><a><span class="badge badge-warning float-right"><a href="{{i.get_response}}" class="btn btn-primary float-right">Voir les réponses</a></span></a></h6>
+                <p class="text-muted ml-4">{{i.created_date}}</p>
+              </div>
+            </div>
+            <hr>
+              {% endfor %}
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+      </div>
+    </div>
+
+  </section>
+  <!-- Section: Block Content -->
+
+</div>
+
+
+
+
+{% endblock content %}

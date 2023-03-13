@@ -1,0 +1,555 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
+{% load ratings %}
+
+{% block content %}
+
+<style type="text/css">
+    body {
+
+     font-family : Lucida, sans-serif;
+
+
+</style>
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+  <!--Carousel Wrapper-->
+  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4 " data-ride="carousel" style="height:45rem; margin-top:-2.1%;">
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+        <div class="view" style="background-image: url('https://cdn.pixabay.com/photo/2016/02/01/21/15/excavators-1174428_1280.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+
+
+        </div>
+      </div>
+      <!--/First slide-->
+
+      <!--Second slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('https://cdn.pixabay.com/photo/2017/06/30/12/10/shipyard-2458150_1280.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Learn Bootstrap 4 with MDB</strong>
+              </h1>
+
+              <p>
+                <strong>Best & free guide of responsive web design</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and
+                  written versions
+                  available. Create your own, stunning website.</strong>
+              </p>
+
+              <a href="{% url 'omniparc:search' %}" class="btn btn-outline-white btn-lg">Effectuer votre premiere recherche ici
+                <i class="fas fa-search ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Second slide-->
+
+      <!--Third slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('https://cdn.pixabay.com/photo/2017/04/18/13/04/construction-site-2239006_1280.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Learn Bootstrap 4 with MDB</strong>
+              </h1>
+
+              <p>
+                <strong>Best & free guide of responsive web design</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users. Video and
+                  written versions
+                  available. Create your own, stunning website.</strong>
+              </p>
+
+              <a href="{% url 'omniparc:search' %}" class="btn btn-outline-white btn-lg">Effectuer votre premiere recherche ici
+                <i class="fas fa-search ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Third slide-->
+
+    </div>
+    <!--/.Slides-->
+
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+
+  </div>
+  <!--/.Carousel Wrapper-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"/>
+
+
+<!-- features -->
+<div class="container my-5 p-5 z-depth-2">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text">
+
+    <!-- Section heading -->
+    <h2 class="text-center font-weight-bold mb-4 pb-2">Pourquoi choisir omniparc ?</h2>
+    <!-- Section description -->
+    <p class="text-center lead grey-text mx-auto mb-5">Omniparc est la premiere plateforme en algérie proposant une large selection d'entreprise de réferences possedant des engins pour location</p>
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mb-md-0 mb-5">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-2 col-md-3 col-2">
+          <i class="fa fa-tag blue-text fa-3x" aria-hidden="true"></i>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-lg-10 col-md-9 col-10">
+            <h4 class="font-weight-bold">Du sur mesure</h4>
+            <p class="grey-text">Sur omniparc vous trouverez une solution quel que soit votre besoin</p>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 mb-md-0 mb-5">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-2 col-md-3 col-2">
+            <i class="fa fa-clock blue-text fa-3x" aria-hidden="true"></i>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-lg-10 col-md-9 col-10">
+            <h4 class="font-weight-bold">Rapide</h4>
+            <p class="grey-text">Avec omniparc, vous aller gagnez du temps de l'énergie et faire des économies </p>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4">
+
+        <!-- Grid row -->
+        <div class="row">
+
+          <!-- Grid column -->
+          <div class="col-lg-2 col-md-3 col-2">
+            <i class="fas fa-tachometer-alt blue-text fa-3x"></i>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-lg-10 col-md-9 col-10">
+            <h4 class="font-weight-bold">Support</h4>
+            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+<!-- fin features -->
+
+<div class="container z-depth-2 my-5 py-5">
+
+  <!-- Section -->
+  <section>
+
+    <style>
+      .border-top {
+        border-top-width: 2px !important;
+      }
+  	</style>
+
+    <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Votre profile</h6>
+    <h3 class="font-weight-bold text-center dark-grey-text pb-2">Qui êtes vous ?</h3>
+    <h5 class="font-weight-bold text-center grey-text pb-2">Acceder à notre catalogue riche en équipement correspondant a vos besoins.</h5>
+    <hr class="w-header my-4">
+    <p class="lead text-center text-muted pt-2 mb-5"></p>
+
+    <div class="row d-flex justify-content-center">
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <h5 class="font-weight-normal border-top border-primary pt-4 mb-4 text-center"><a class="dark-grey-text " href="#" id="hr1" >Professionels du BTP</a></h5>
+        <p class="text-muted mb-5 pb-md-3">Vous étes un professionnel du BTP, cliquez ici pour consulter les offres vous correspondant. </p>
+      </div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <h5 class="font-weight-normal border-top border-primary pt-4 mb-4 text-center"><a class="dark-grey-text"
+            href="#">Professionnels de la manutention</a></h5>
+        <p class="text-muted mb-5 pb-md-3">Written enquire painful to offices forming it. Then so does over sent
+          dull. Likewise offended humour mrs
+          fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <h5 class="font-weight-normal border-top border-primary pt-4 mb-4 text-center"><a class="dark-grey-text" href="#">Secteur industriel</a></h5>
+        <p class="text-muted mb-5">Written enquire painful to offices forming it. Then so does over sent dull.
+          Likewise offended humour mrs
+          fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+      </div>
+
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        <h5 class="font-weight-normal border-top border-primary pt-4 mb-4 text-center "><a class="dark-grey-text"
+            href="#">Logistique</a></h5>
+        <p class="text-muted mb-5">Written enquire painful to offices forming it. Then so does over sent dull.
+          Likewise offended humour mrs
+          fat trifling answered. On ye position greatest so desirous enable performance based.</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- Section -->
+
+</div>
+
+
+
+
+<div class="container mt-4 mb-4 my-5 p-5 z-depth-2 ">
+                <div class="card border-0">
+                    <div class="card-body ">
+                            <div class="col-md-12 text-center  ">
+                                <h2 class="font-weight-bold  dark-grey-text mb-4 pb-2">Commencer par faire une recherche</h2>
+                                <p class="text-big grey-text">Rechercher par l'une des catégories suivante.</p><hr style="width:500px;">
+                            </div>
+                            <div class="col-md-12 ">
+                                    <!-- Mask & flexbox options-->
+
+
+            <!-- Content -->
+            <div class="text-center  mx-5 wow fadeIn">
+                <form method="get" action="{% url 'omniparc:search' %}">
+
+
+                        <div class="form-inline mb-4 ">
+                             <div class="input-group col-lg-3">
+                                <input class="form-control py-2 border-right-0 border"  type="text" name="profile" id="profile" placeholder="Votre profile"/>
+                                <span class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="far fa-user"></i>
+                                    </div>
+                                </span>
+                             </div>
+
+                                 <div class="input-group col-lg-3">
+                                    <input class="form-control py-2 border-right-0 border" type="text" name="q1" id="q" placeholder="Par équipement ..."/>
+                                    <span class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-spell-check"></i>
+                                        </div>
+                                    </span>
+                                 </div>
+
+                                 <div class="input-group col-lg-3">
+                                    <input class="form-control py-2 border-right-0 border" type="text" name="category" id="category" placeholder="Par catégorie..."/>
+                                    <span class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-layer-group"></i>
+                                        </div>
+                                    </span>
+                                 </div>
+
+                                 <div class="input-group col-lg-3">
+                                    <input class="form-control py-2 border-right-0 border" type="text" name="q" id="localisation_engin" placeholder="Par localité..."/>
+                                    <span class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                        </div>
+                                    </span>
+                                 </div>
+                         </div>
+
+                    <strong><div class="grey-text mb-4 ">Entrer les dates prévu de location</div> </strong>
+                        <div class="form-inline mb-4 ">
+
+                             <div class="input-group col-sm-6">
+                                <input class="form-control py-2 border-right-0 border"  type="date" name="date_min"  placeholder="Votre profile"/>
+                                <span class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </span>
+                             </div>
+
+                                 <div class="input-group col-sm-6">
+                                    <input class="form-control py-2 border-right-0 border" type="date" name="date_max" placeholder="Par équipement ..."/>
+                                    <span class="input-group-append">
+                                        <div class="input-group-text">
+                                           <i class="fas fa-clock"></i>
+                                        </div>
+                                    </span>
+                                 </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">
+                          <span class="glyphicon glyphicon-search"></span> Lancer la recherche
+                              <i class="fas fa-search ml-2"></i>
+                        </button>
+                        {% if user.is_authenticated %}
+                         {% if user.profile.is_entreprise or user.profile.is_particulier %}
+                        <a  href="{% url 'omniparc:depot-annonce' %}" class="btn btn-success">
+                             <span class="glyphicon glyphicon-search"></span> Déposer une annonce
+                              <i class="fas fa-search ml-2"></i>
+                        </a>
+                        {% endif %}
+                        {% endif %}
+
+
+                </form>
+
+
+              <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+  <!--Main layout-->
+  <main>
+    <div class="container my-4 p-2 z-depth-2" >
+
+
+
+      <!--Section: Products v.3-->
+        <div class="card border-0 mb-2  "  >
+            <div class="card-body ">
+                <div class="card-title text-center mb-4"><h4>Nos 6 derniers engins</h4> <p>Une liste des 6 derniers engin sur la plateforme</p><hr style="width:500px;"></div>
+                <section class="mb-4">
+                    <div class="row wow fadeIn ">
+                      {% for item in object_list %}
+                              <div class="col-lg-3 col-md-5 mb-4  " >
+                                    <div class="card"  style="height: 100%; width: 14rem;" >
+                                      <div class="view overlay">
+                                        <img src="{{item.image.url}}" class="card-img-top" style="height: 75%;" alt="">
+                                          <a>
+                                            <a href="{{item.get_absolute_url}}"></a>
+
+                                          </a>
+                                      </div>
+                                      <div class="card-body" style="margin-top:-50px; ">
+                                            <a href="" class="grey-text " style="font-size:14px;" >
+                                              <p>{{item.get_category_display}}</p>
+                                            </a>
+                                            <p>
+
+                                                <a href="{{item.get_absolute_url}}"  style="margin-top:5px;" class="dark-grey-text">{{item.get_label_display}}</a>
+
+                                            </p>
+                                      </div>
+                                        <!-- star rating -->
+                                          <!--{% if item.user == request.user or request.user.profile.is_particulier %}
+                                            {% ratings item %}
+                                          {% endif %}-->
+                                    </div>
+                              </div>
+
+                        {% empty %}
+                            <div class="text-center">
+                                <p>Aucun élement disponible pour le moment </p>
+                            </div>
+
+                        {% endfor %}
+        </div>
+      </section>
+
+
+            </div>
+        </div>
+
+
+
+      <!--Section: Products v.3-->
+
+      {% if is_paginated %}
+      <!--Pagination-->
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+          <!--Arrow left-->
+          <li class="page-item ">
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{page_obj.number}}">  {{page_obj.number}}
+              <span class="sr-only">(current)</span>          
+            </a>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+      <!--Pagination-->
+
+    </div>
+
+
+      <div class="container mb-5 my-4 p-2 z-depth-2 ">
+             <section class="section mt-5">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div>
+                      <img alt="Web Studio" class="img-fluid" src="https://raw.githubusercontent.com/solodev/vertically-centering/master/images/vc-img-1.jpg" />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-5 ml-auto d-flex align-items-center mt-4 mt-md-0">
+                    <div>
+                      <h2>Comment ça marche</h2>
+                        <p class="margin-top-s">Pour connaitre la démarche a suivre afin de profiter de nos service, veuillez suivre se lien, <a href="{% url 'omniparc:how_it_works' %}">Comment ça marche ?</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </div>
+  </main>
+
+
+<div class="container my-5 z-depth-2">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text p-5">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-5 mb-4 mb-md-0">
+
+        <div class="view">
+          <img src="{% static 'img/3459557.png' %}" class="img-fluid" alt="smaple image">
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-7 mb-lg-0 mb-4">
+
+          <form  method = 'POST' action="{% url 'marketing:subscribe' %}">
+               <!-- Section heading -->
+          <h3 class="font-weight-bold my-3">Abonnez vous </h3>
+              {% csrf_token %}
+              {{form|crispy}}
+           <button class="btn btn-primary float-right" type="submit" value = "Subscribe" id = "email_submit">Subscribe</button>
+          </form>
+        <!-- Form -->
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+  {% endblock content %}
+

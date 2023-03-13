@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+ 
+{% block content %}
+
+<style type="text/css">
+   body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-5 mb-5">
+
+          <img src="{{ object.image.url}}" class="img-fluid" alt="" style="width: 50%; hight:50%;">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4 mr-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{object.get_category_display}}</span>
+              </a>
+            </div>
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{object.description}}</p>
+           <!--<form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <!--<input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>>
+              </button>
+            </form> -->
+            {%  if request.user.is_authenticated %}
+             {% if request.user != object.user or request.user.is_offre or request.user.is_particulier %}
+              <a href="{{object.get_detail_info_comm}}" class="btn btn-primary btn-md my-0 p" >
+                 Faire une réservations
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </a>
+              <a href="{{object.get_demande_devis}}" class="btn btn-warning btn-md my-0 p" >
+                 Demander un devis
+               <i class="fas fa-file-invoice ml-1"></i>
+              </a>
+             {% endif %}
+               {% else %}
+              <p>Pour pouvoir voir la disponibiliter de cette engin, veuillez vous connecter.</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-md my-0 p" >
+                            Se Connecter
+                        <i class="fa fa-user ml-1"></i>
+                    </a>
+              <br>
+              <br>
+
+              <p>Vous n'avez pas de compte veuillez vous <a href="% url 'omniparc:plan-choice' %}"  >inscrire ici.</a></p>
+               {% endif %}
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Informations</h4>
+
+          <p>Consulter dans cette partie l'ensemble des informations est caractéristiques liée a l'article.</p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn ">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card" style="height:100%;">
+            <div class="card-body">
+              <div class="card-title">Disponibilité de l'article</div>
+
+                {% if object.disponible == True %}
+                <p style="margin-left:4%;">Disponible</p>
+                {% else %}
+                <p style="margin-left:4%;">Non disponible</p>
+                {% endif %}
+
+
+            </div>
+
+          </div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">Caractéritiques techniques</div>
+
+            </div>
+
+          </div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">Conditions de commandes</div>
+
+            </div>
+
+          </div>
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+  {% endblock content %}
+  

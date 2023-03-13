@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            {% for i in responde %}
+
+                     {{ i.slug_annonce}}//{{i.auteur}}
+
+
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+
+
+  <!--Section: Content-->
+  <section class="">
+
+    <!-- Section heading -->
+    <h3 class="text-center font-weight-bold mb-5">Liste des propositions</h3>
+
+  	<div class="row">
+
+
+
+          {% for i in responde %}
+      <!--Grid column-->
+      <div class="col-md-4 mb-4">
+        <!--Card-->
+        <div class="card">
+          <!--Card content-->
+          <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title"><strong>{{i.auteur.profile.organisation}}</strong></h4>
+            <hr>
+            <!--Text-->
+            <p class="card-text mb-3">Localisation engin : {{i.item.localisation_engin }}</p>
+
+             {% if i.ann.date_de_debut == i.date_debut_commande and i.ann.date_de_fin == i.date_fin_commande %}
+            <p class="card-text mb-3">Durée de location repecter</p>
+              {% else %}
+              <p class="card-text warning mb-3">Durée de location non repecter</p>
+              {% endif %}
+
+
+
+
+            <p class="font-small font-weight-bold dark-grey-text mb-1"><i class="far fa-clock-o"></i>
+              {{i.created_date}}</p>
+            <p class="font-small grey-text mb-0">{{i.auteur.last_name}} {{i.auteur.first_name}} </p>
+            <p class="text-right mb-0 font-small font-weight-bold"><a>Consulter l'offre <i class="fas fa-angle-right"></i></a></p>
+          </div>
+          <!--/.Card content-->
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+          {% endfor %}
+
+    </div>
+
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+
+{% endblock content %}

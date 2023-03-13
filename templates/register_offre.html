@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css-forms/opensans-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts-forms/line-awesome/css/line-awesome.min.css' %}">
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'css-forms/style.css' %}"/>
+
+<body class="form-v4">
+	<div class="page-content bg-white">
+		<div class="form-v4-content w-75 mt-4">
+			<div class="form-left bg-primary">
+				<h2>INFOMATION</h2>
+				<p class="text-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et molestie ac feugiat sed. Diam volutpat commodo.</p>
+				<p class="text-2"><span>Eu ultrices:</span> Vitae auctor eu augue ut. Malesuada nunc vel risus commodo viverra. Praesent elementum facilisis leo vel.</p>
+				<div class="form-left-last">
+					<input type="submit" name="account" class="account" value="Have An Account">
+				</div>
+			</div>
+			<form method="POST" id="myform" class="form-detail">
+                    {% csrf_token %}
+                    {{form}}
+
+				<input class="btn btn-primary float-right" style="width: 200px; " type="submit"/>
+			</form>
+		</div>
+	</div>
+</body>
+
+{% endblock content %}

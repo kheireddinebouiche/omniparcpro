@@ -1,0 +1,60 @@
+{% extends 'backadminpanel/base.html' %}
+{% load static %}
+
+{% block content %}
+<main  style="margin-bottom: 10rem;">
+  <div class="container mt-2 mb-5" >
+      <div class="card">
+        <div class="card-body ml-5 mr-5 mt-5">
+         <div class="container">
+           <div class="table-responsive text-nowrap">
+            <h2> Liste des commandes reçu </h2>
+          <table class="table">
+            <thread>
+              <tr>
+                <th scrope="col">#</th>
+                  <th scrope="col">Ref. Commande</th>
+                  <th scrope="col">Date de la demande</th>
+                <th scrope="col">Designation </th>
+                <th scrope="col">Prix total</th>
+                <th scrope="col">Etat de la commande</th>
+                <th scrope="col">Action</th>
+
+              </tr>
+            </thread>
+            <tbody>
+              {% for order_item in commande %}
+              <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{order_item.item_order_id}}</td>
+                    <td>{{order_item.date_de_demande}}</td>
+                    <td>{{order_item.item.title}}</td>
+                    <td>{{order_item.item.price}}</td>
+                    <td>{{order_item.get_status_display}}</td>
+                    <td>
+                        <a class="btn btn-warning" href="{{order_item.get_absolute_url}}">Details<a/>
+                    </td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="7"><H3>Vous n'aves acutallement aucune commande en cours</H3></td>
+                  <tr>
+                  <td colspan="7">
+                    <b><a href="/" class="btn btn-primary float-right ">Continuer vos commandes</a></b>
+                  </td>
+              </tr>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+ </main>
+
+
+{% endblock content %}

@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style type="text/css">
+    .j{
+      text-decoration : none;
+      color : #000000;
+    }
+
+    #ee, #tt, #dd, #pp, #mm {
+        font-size : 13px;
+    }
+
+    .ei:hover{
+        font-size:13px;
+    }
+
+
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+<div class="container mt-2 px-0 z-depth-1" style="width:2500px;">
+
+
+  <!--Section: Content-->
+  <section class="text-center text-lg-left white-text grey p-5"
+    style="background-image: url(https://cdn.pixabay.com/photo/2016/10/12/23/20/mining-excavator-1736289_1280.jpg);">
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-6 offset-md-2">
+
+          <h3 class="font-weight-bold">Notre catalogue</h3>
+
+          <h5 class="h5">Découvrez notre large panel de catégorie d'engin</h5>
+
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id quam sapiente molestiae
+            numquam quas, voluptates omnis nulla ea odio quia similique corrupti magnam.</p>
+
+
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+<div class="container mt-5">
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-4">
+    <!-- Card -->
+            <div class="card">
+              <!--Card content-->
+              <div class="card-body" style="height:500px;">
+                <!--Title-->
+                <h4 class="card-title">Travaux en hauteur</h4>
+                <!--Text-->
+                <p class="card-text">
+                    <ul id="dd" class="list-group list-group-flush">
+
+                        <li id="l" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_camion_nacelle_pi' %}">Camion nacelle PI</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+                      <li id="l1" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_camion_nacelle_vi' %}">Camion nacelle VI</a>
+                             <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    <li id="l2" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_er' %}">Echafaudages roulants</a>
+                             <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    <li id="l3" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_na' %}">Nacelle araignée</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                     <li id="l4" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_nar' %}">Nacelle articulée</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    <li id="l5" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_nc' %}">Nacelle ciseaux</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                     <li id="l6" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_nt' %}">Nacelle telescopique</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    <li id="l7" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_ntc' %}">Nacelle toucan</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    <li id="l8" class="list-group-item ei"><a class="j" href="{% url 'omniparc:filter_nel' %}">Nacelle élévatrice</a>
+                            <i class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+                    </ul>
+                </p>
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+
+              </div>
+
+            </div>
+            <!-- Card -->
+  </div>
+  <div class="col mb-4">
+    <!-- Card -->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body " style="height:500px;">
+
+        <!--Title-->
+        <h4 class="card-title">Terrassement & Extraction</h4>
+        <!--Text-->
+        <p class="card-text">
+
+            <ul id="ee"  class="list-group list-group-flush">
+
+                        <li id="40" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_b' %}">Buldozer </a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+                        <li id="l11" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_c' %}">Chargeuse</a>
+                             <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                        <li id="l12" class="list-group-item">Dumper
+                             <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                     <li id="l13" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_mc' %}">Mini chargeuse</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                     <li id="l14" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_mp' %}">Mini pelle</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l15" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_p' %}">Pelleteuse</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    </ul>
+
+        </p>
+
+      </div>
+
+    </div>
+    <!-- Card -->
+  </div>
+  <div class="col mb-4">
+    <!-- Card -->
+    <div class="card">
+
+
+      <!--Card content-->
+      <div class="card-body" style="height:500px;">
+
+        <!--Title-->
+        <h4 class="card-title">Levage & Manutention</h4>
+        <!--Text-->
+        <p class="card-text">
+
+            <ul id="tt" class="list-group list-group-flush">
+
+                        <li id="l16" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_ch' %}"> Chariot élévateur </a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+          <li id="l17" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_ct' %}">Chariot télescopique</a>
+                             <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l18" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_gt' %}">Gerbeur et transpalette</a>
+                             <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l19" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_gmv' %}">Glaslift monte vitre</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l20" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_g' %}">Grue mobile</a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l21" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_gsr' %}"> Grue sur remorque</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l22" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_mga' %}"> Mini grue araignée</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l23" class="list-group-item"> <a class="j" href="{% url 'omniparc:filter_mgb' %}">Mini grue mobile</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+          <li id="l24" class="list-group-item"> <a class="j" href="{% url 'omniparc:filter_mca' %}">Mini grue mobile</a>
+                            <i   class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    </ul>
+
+        </p>
+
+        </p>
+      </div>
+
+    </div>
+    <!-- Card -->
+  </div>
+
+</div>
+
+</div>
+
+<div class="container mt-5">
+<div class="row row-cols-5 row-cols-md-3">
+  <div class="col mb-2">
+    <!-- Card -->
+            <div class="card">
+              <!--Card content-->
+              <div class="card-body" style="height:500px;">
+                <!--Title-->
+
+                <h4 class="card-title">Chargement & transport </h4>
+                <!--Text-->
+
+                <p class="card-text">
+                    <ul id="pp" class="list-group list-group-flush">
+
+                        <li id="l" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_be' %}">Benne </a>
+                            <i  id="arrow1" class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+                  <li id="l1" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_cb' %}">Camion benne</a>                             <i  id="arrow2" class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                  <li id="l2" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_cbg' %}">Camion bras de grue</a>
+                             <i  id="arrow3" class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                  <li id="l3" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_tom' %}">Tombereau</a>
+                            <i  id="arrow4" class="fas fa-arrow-right float-right" ></i>
+                        </li>
+
+
+                    </ul>
+                </p>
+                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+
+              </div>
+
+            </div>
+            <!-- Card -->
+  </div>
+  <div class="col mb-2">
+    <!-- Card -->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body " style="height:500px;">
+
+        <!--Title-->
+        <h4 class="card-title"> Gros oeuvre & démolition </h4>
+        <!--Text-->
+        <p class="card-text">
+
+            <ul id="mm"  class="list-group list-group-flush">
+
+                        <li id="l10" class="list-group-item"><a class="j" href="{% url 'omniparc:filter_rb' %}">Robot de démolition </a>
+                            <i  class="fas fa-arrow-right float-right" ></i>
+                        </li>
+                    </ul>
+
+        </p>
+
+      </div>
+
+    </div>
+    <!-- Card -->
+  </div>
+
+
+</div>
+
+</div>
+
+{% endblock content %}

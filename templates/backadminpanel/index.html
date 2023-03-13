@@ -1,0 +1,101 @@
+{% extends 'backadminpanel/base.html' %}
+
+{% load static %}
+{%block content %}
+
+      <!-- Counts Section -->
+      <section class="dashboard-counts section-padding">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Count item widget-->
+            <div class="col-xl-3 col-md-3 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-user"></i></div>
+                <div class="name"><strong class="text-uppercase">Nombre de machine</strong>
+                  <div class="count-number">{{objects.count}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-3 col-md-3 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-padnote"></i></div>
+                <div class="name"><strong class="text-uppercase">Nombre de devis</strong>
+                  <div class="count-number">{{nb_devis.count}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-3 col-md-3 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-check"></i></div>
+                <div class="name"><strong class="text-uppercase">Nombre de commandes</strong>
+                  <div class="count-number">342</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-3 col-md-3 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-bill"></i></div>
+                <div class="name"><strong class="text-uppercase">Nombre de clients</strong>
+                  <div class="count-number">123</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Count item widget-->
+
+          </div>
+        </div>
+      </section>
+      <!-- Header Section-->
+      <section class="dashboard-header section-padding">
+        <div class="container-fluid">
+          <div class="row d-flex align-items-md-stretch">
+            <!-- To Do List-->
+            <div class="col-lg-3 col-md-6">
+              <div class="card to-do">
+                <h2 class="display h4">To do List</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+                  {% for i in objects %}
+                    <ul class="check-lists list-unstyled">
+                      <li class="d-flex align-items-center"> 
+                        <input type="checkbox" id="list-1" name="list-1" class="form-control-custom">
+                        <label for="list-1"> {{i.title}} </label>
+                      </li>  
+                  {% endfor %}
+
+                </ul>
+              </div>
+            </div>
+            <!-- Pie Chart-->
+            <div class="col-lg-3 col-md-6">
+              <div class="card project-progress">
+                <h2 class="display h4">Project Beta progress</h2>
+                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <div class="pie-chart">
+                  <canvas id="pieChart" width="300" height="300"> </canvas>
+                </div>
+              </div>
+            </div>
+            <!-- Line Chart -->
+            <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+              <div class="card sales-report">
+                <h2 class="display h4">Sales marketing report</h2>
+                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet officiis</p>
+                <div class="line-chart">
+                  <canvas id="lineCahrt"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Statistics Section-->
+     
+      {% include 'backadminpanel/footer.html' %}
+
+
+  {% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'backadminpanel/base.html' %}
+
+{% block content %}
+
+
+<main  style="margin-bottom: 10rem;">
+  <div class="container mb-5 mt-5" >
+      <div class="card">
+        <div class="card-body ml-5 mr-5 mt-5">
+         <div class="container">
+           <div class="table-responsive text-nowrap">
+           <center><h1> Liste des devis </h1></center>
+               <br>
+               <br>
+               <br>
+          <table class="table">
+            <thread>
+              <tr>
+                <th scrope="col">#</th>
+                  <th scrope="col">Ref. Commande</th>
+                <th scrope="col">Designation </th>
+                <th scrope="col">Date de demmande </th>
+                <th scrope="col">Date de modification </th>
+                <th scrope="col">Durée de location</th>
+                <th scrope="col">Action</th>
+
+              </tr>
+            </thread>
+            <tbody>
+              {% for i in devis %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.id_devis}}</td>
+                <td>{{i.item}}</td>
+                <td>{{i.created_at}}</td>
+                <td>{{i.updated_at}}</td>
+                <td>{{i.dure_location}}</td>
+                <td><a href="{{i.get_udpate_devis}}" class="btn btn-warning">Modifier le devis</a></td>
+
+
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="7"><H3>Vous n'aves acutallement aucun devis.</H3></td>
+                  <tr>
+              </tr>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+ </main>
+
+
+{% endblock content %}

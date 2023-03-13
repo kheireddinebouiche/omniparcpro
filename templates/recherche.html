@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style type="text/css">
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+{% if user.is_authenticated %}
+<div class="container py-5 my-5 z-depth-1">
+
+   <p class="mx-auto text-center font-weight-bold mb-5 pb-2">Vos avez {{filter.count}} resultats de recherche correspondant a vos critéres de recherche, et {{other.count}} approximatifs </p>
+   <hr>
+    <section class="p-md-3 mx-md-5">
+    <h4 class="mx-auto font-weight-bold mb-5 pb-2">Vos avez {{filter.count}} resultats de recherche</h4>
+
+    <div class="row">
+        {% for obj in filter %}
+      <div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+        <div class="avatar white d-flex justify-content-center align-items-center">
+          <img src="{{ obj.image.url }}" class="img-fluid z-depth-1" style="height:150px; width:150px;"/>
+        </div>
+        <div class="text-center mt-4">
+          <h5 class="font-weight-bold pb-1">{{obj.get_category_display}}</h5>
+          <p class="font-weight-normal">{{obj.title}}</p>
+          <p class="font-weight-normal">{{obj.date_debut}}</p>
+          <p class="font-weight-normal">{{obj.date_fin}}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+  </section>
+
+  <section class="p-md-3 mx-md-5">
+    <h4 class="mx-auto font-weight-bold mb-5 pb-2">Vos avez {{other.count}} resultats de recherche se rapprochant de vos critérs</h4>
+
+    <div class="row">
+        {% for obj in other %}
+      <div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+        <div class="avatar white d-flex justify-content-center align-items-center">
+          <img src="{{ obj.image.url }}" class="img-fluid z-depth-1" style="height:150px; width:150px;"/>
+        </div>
+        <div class="text-center mt-4">
+          <h5 class="font-weight-bold pb-1">{{obj.get_category_display}}</h5>
+          <p class="font-weight-normal">{{obj.title}}</p>
+          <p class="font-weight-normal">{{obj.date_debut}}</p>
+          <p class="font-weight-normal">{{obj.date_fin}}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+  </section>
+</div>
+
+
+
+{% else %}
+
+
+     <div class="container h-100 my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+
+      <h3 class="font-weight-bold">Resultats de recherche</h3>
+
+      <p class="text-muted mb-5">Votre recherche affiche {% if object_list.count > 1 %} {{object_list.count}} resultats {% else %} {{object_list.count}} resultat {% endif %}, pour pouvoir les visualiser veuillez créer un compte. </p>
+
+      <!--Grid row-->
+      <div class="row">
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-12 mb-lg-0 mb-4">
+
+          <i class="fas fa-users text-primary fa-8x"></i>
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-6 mb-lg-0 mb-lg-0 mb-2">
+
+          <h4 class="h4">Pourquoi il est préférable de créer un compte?</h4>
+
+          <p class="text-muted">Hormis la visualation de vos resulats de recherche, vous pourrai parcourir tous le catalogue d'engin disponible sur la plateforme, ainsi pleins d'avantage.</p>
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 text-center">
+          <a class="btn btn-info  btn-md" href="{% url 'omniparc:plan-choice' %}" role="button">Consulter nos offres</a>
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+
+{% endif %}
+
+
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'backadminpanel/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="container mt-4">
+    <div class="card">
+
+        <div class="card-body">
+            <div class="card-title text-center py-4 h1">Formulaire de modification du devis</div>
+            <form method="post" action=".">
+                 {% csrf_token %}
+                 {{form|crispy}}
+                 <button class="btn btn-primary mt-3 float-right" >Sauvegarder les modifications</button>
+             </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

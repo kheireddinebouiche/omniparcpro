@@ -1,0 +1,94 @@
+{% extends 'backadminpanel/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        <div class="container mt-3 col-md-8 col-lg-8 col-xl-8" >
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title"> Modification de l'article {{object.title}} </h2>
+                    <hr>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!--{{form|crispy}}-->
+                        <div class="form-group">
+                            <label class="h6" for="title">Références/Immatriculation de l'engin :</label>
+                            <input class="form-control" type="text" name="title" value="{{item.title}}" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label class="h6">Prix de location de l'engin : </label>
+                            {{form.price}}
+                        </div>
+                        <div class="form-group">
+                            <label class="h6">Prix avec opérateur :</label>
+                            {{form.prix_avec_operateur}}       
+                        </div>
+
+                        <div class="form-group">
+                            <label class="h6">Prix avec livraison/reprise :</label>
+                            {{form.prix_avec_livraison_reprise}}
+                        </div>
+
+                        <div class="form-group">
+                            <label class="h6">Mode location (Heure/jour) : </label>
+                            {{form.mode_location}}
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label class="h6">Catégorie de l'engin : </label>
+                                    {{form.category}}
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="h6">Type de l'engin : </label>
+                                    {{form.label}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="h6">Journée(s) disponible : </label>
+                            {{form.disp}}
+                        </div>
+                        
+
+
+                        <div class="form-group">
+                            <label class="h6">Photo de l'image : </label>
+                            {{form.image}}
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                               <div class="col-lg-6">
+                                <label class="h6">Date de debut de disponibilité : </label>
+                                {{form.date_debut}}
+                              </div>
+
+                                <div class="col-lg-6">
+                                    <label class="h6">Date de fin de disponibilité : </label>
+                                   {{form.date_fin}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="h6">Saisir la description de votre engin :</label>
+                            {{form.description}}
+                        </div>
+
+
+
+
+
+                    <input class="btn btn-danger float-right" type="submit" value="Mettre à jour les informations">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock content %}

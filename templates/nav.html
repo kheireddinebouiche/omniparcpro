@@ -1,0 +1,148 @@
+
+{% load static %}
+
+{% block content %}
+
+{% load cart_template_tags %}
+<!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar ">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="/" >
+        <strong class="blue-text ">OMNIPARC</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/">Acceuil
+            </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'omniparc:entreprise-list' %}">Nos partenaires
+            </a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'omniparc:catalogue' %}">Notre Catalogue
+            </a>
+          </li>
+            {% if user.is_authenticated %}
+            {% if user.profile.is_entreprise or user.profile.is_offre %}
+            <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'omniparc:annonce' %}">Annonces
+            </a>
+          </li>
+            {% endif %}
+            {% endif %}
+
+                <!-- PROFILE DROPDOWN - scrolling off the page to the right -->
+           <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" id="navDropDownLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                A propos</a>
+               <div class="dropdown-menu" aria-labelledby="navDropDownLink">
+                   <a class="dropdown-item" href="{% url 'omniparc:about_us' %}">Qui somme nous ?</a>
+                    <div class="dropdown-divider"></div>
+                   <a class="dropdown-item" href="{% url 'omniparc:how_it_works' %}">Comment ça marche?</a>
+                    <div class="dropdown-divider"></div>
+                   <a class="dropdown-item" href="{% url 'omniparc:charte' %}">Charte d'utilisation</a>
+                   <div class="dropdown-divider"></div>
+                   <a class="dropdown-item" href="{% url 'omniparc:faq' %}">Posez vos question</a>
+               </div>
+
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'omniparc:contact' %}">Contact
+            </a>
+          </li>
+        </ul>
+
+        <!-- Right -->
+
+        <ul class="navbar-nav nav-flex-icons">
+          {% if request.user.is_authenticated %}
+            {% if request.user.profile.is_particulier or request.user.profile.is_offre %}
+          <li class="nav-item">
+            <a href= "/order_summery" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Mes pré-commandes </span>
+            </a>
+          </li>
+            {% endif %}
+        </ul>
+
+        <ul class="navbar-nav">
+                <!-- PROFILE DROPDOWN - scrolling off the page to the right -->
+                <li class="nav-item dropdown ">
+                    <a href="#" style="color:#ffffff; border-radius:10px;" class="nav-link btn btn-primary btn-downcase dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                MON ESPACE</a>
+                    <div class="dropdown-menu" aria-labelledby="navDropDownLink">
+                        {% if user.profile.is_entreprise or user.profile.is_offre %}
+                        <a class="dropdown-item" href="{% url 'omniparc:Administration' %}">Centre de contrôle</a>
+                        {% endif %}
+                        {% if user.profile.is_particulier %}
+                        <a class="dropdown-item" href="{% url 'omniparc:monprofile' %}">Mon profile</a>
+                        {% endif %}
+                        {% if user.profile.is_entreprise or user.profile.is_particulier %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'omniparc:mes_annonces' %}">Mes annonces</a>
+                        {% endif %}
+
+                        {% if request.user.profile.is_particulier or request.user.profile.is_offre %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'omniparc:commandes' %}">Mes commandes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'omniparc:list' %}">Mes Devis/factures</a>
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <ul class="navbar-nav nav-flex-icons">
+                              <li class="nav-item">
+                                <a class="nav-link waves-effect" href="{% url 'logout' %}">
+                                  <span class="clearfix d-none d-sm-inline-block"> Se déconnecter </span>
+                                </a>
+                        </li>
+        </ul>
+                    </div>
+                </li>
+            </ul>
+         {% else %}
+          <a class="nav-link mt-2 btn-downcase"  href="{% url 'omniparc:plan-choice' %}">S'inscrire </a>
+            <div class="btn-center p-0">
+                <div class="btn-center-lg">
+                    <a class="btn btn-primary btn-downcase" href="{% url 'login' %}"> MON ESPACE</a>
+                </div>
+                </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Navbar -->
+   <!-- Navbar -->
+  <div class="mt-5 pt-4" style="width: 30%; margin-left: 30%;">
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissable fade show " style="text-align: center;" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+       </div>
+      {% endfor %}
+    {% endif %}
+ </div>
+
+ {% endblock content %}

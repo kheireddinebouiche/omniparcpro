@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style type="text/css">
+  body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+
+<main  style="margin-bottom: 10rem;">
+  <div class="container mb-5 mt-5 " >
+      <div class="card ">
+        <div class="card-body ml-5 mr-5 mt-5">
+         <div class="container w-100">
+           <div class="table-responsive text-nowrap">
+            <h2> Mes devis </h2>
+          <table class="table">
+            <thread>
+              <tr>
+                <th scrope="col">#</th>
+                  <th scrope="col">Ref. Commande</th>
+                <th scrope="col">Designation </th>
+                <th scrope="col">Durée de location</th>
+                <th scrope="col">Montant services additionel</th>
+                <th scrope="col">Etat</th>
+                <th scrope="col">Action</th>
+
+              </tr>
+            </thread>
+            <tbody>
+              {% for devis in list %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{devis.id_devis}}</td>
+                <td>{{devis.item}}</td>
+                <td>{{devis.dure_location}}</td>
+                <td>{{devis.montant_service_adi}} DA</td>
+                <td>{{devis.etat_devis}}</td>
+
+                  <td>
+                    {% if devis.etat_devis == 'Devis confirmer' %}
+                     <a class="btn btn-warning" href="{{devis.get_absolute_url}}">Détails</a>
+                    {% endif %}
+
+                      <a class="btn btn-danger" href="{{devis.get_remove_devis}}">Supprimer</a>
+                  </td>
+
+              </tr>
+              {% empty %}
+                <tr><center>
+                  <td colspan="7"><H3>Vous n'avez actuellement aucun devis.</H3></td></center>
+                  <tr>
+              </tr>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+ </main>
+
+
+
+
+{% endblock content %}

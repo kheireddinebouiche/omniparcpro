@@ -1,0 +1,5 @@
+{% autoescape off %}
+Bonjour {{ user.username }},
+Veuillez cliquer sur le lient suivant pour activé votre compte
+http://{{ domain }}{% url 'omniparc:activate' uidb64=uid token=token %}
+{% endautoescape %}

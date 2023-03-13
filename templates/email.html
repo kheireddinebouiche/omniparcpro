@@ -1,0 +1,88 @@
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    @media (min-width: 768px) {
+    .h-md-100 { height: 100vh; }
+}
+.btn-round { border-radius: 30px; }
+.bg-indigo { background: #0275d8; }
+    .text-cyan { color: #35bdff; }
+
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+        <div class="d-md-flex h-md-100 align-items-center">
+                <!-- First Half -->
+                <div class="col-md-6 p-0 bg-indigo h-md-100">
+                    <div class="text-white d-md-flex align-items-center h-100 p-5 justify-content-center">
+                        <div class="logoarea pt-3 pb-2">
+                            <h3>Restez en contact avec nous.</h3>
+                                 <div class="row">
+                                         <div class="col-sm-12 col-md-6 col-lg-4 my-5 ">
+                                           <div class="card border-0 bg-transparent">
+                                              <div class="card-body text-center">
+                                                <i class="fa fa-phone fa-3x mb-3" aria-hidden="true"></i>
+                                                <h4 class="text-lowerrcase mb-5">Applez nous</h4>
+                                                <p>+8801683615582</p>
+                                              </div>
+                                            </div>
+                                         </div>
+                                         <div class="col-sm-12 col-md-6 col-lg-4 my-5">
+                                           <div class="card border-0 bg-transparent">
+                                              <div class="card-body text-center">
+                                                <i class="fa fa-map-marker fa-3x mb-3" aria-hidden="true"></i>
+                                                <h4 class="text-lowercase mb-5">office loaction</h4>
+                                               <address>Suite 02, Level 12, Sahera Tropical Center </address>
+                                              </div>
+                                            </div>
+                                         </div>
+                                         <div class="col-sm-12 col-md-6 col-lg-4 my-5">
+                                           <div class="card border-0 bg-transparent">
+                                              <div class="card-body text-center">
+                                                <i class="fa fa-globe fa-3x mb-3" aria-hidden="true"></i>
+                                                <h4 class="text-lowercase mb-5">email</h4>
+                                                <p>http://al.a.noman1416@gmail.com</p>
+                                              </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                            </div>
+                    </div>
+                </div>
+
+                <!-- Second Half -->
+                <div class="col-md-6 p-0 bg-white  h-md-100 loginarea">
+                    <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+                        <div class="card w-75">
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <div class="form-actions">
+                                      <button class="btn btn-primary float-right" type="submit">Envoyer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

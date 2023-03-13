@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style type="text/css">
+    #m {
+       margin-bottom : 6%;
+    }
+    #c {
+        height: 970px;
+    }
+
+    body {
+
+     font-family : Lucida, sans-serif;
+
+    }
+    @media (min-width: 768px) {
+    .h-md-100 { height: 100vh; }
+}
+.btn-round { border-radius: 30px; }
+.bg-indigo { background: #0275d8; }
+.text-cyan { color: #35bdff; }
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "OUI";
+    padding-left: 10px;
+    background-color: #0275d8; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "NON";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+#ptext{ font-size:16px;}
+</style>
+
+<style>
+    @media (min-width: 768px) {
+    .h-md-100 { height: 100vh; }
+}
+.btn-round { border-radius: 30px; }
+.bg-indigo { background: #0275d8; }
+    .text-cyan { color: #35bdff; }
+
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+        <div class="d-md-flex h-md-100 align-items-center">
+                <!-- First Half -->
+                <div class="col-md-4 p-0 bg-indigo h-md-100">
+                    <div class="text-white d-md-flex  h-100 p-5 ">
+                        <div class="logoarea pt-4 pb-5 ">
+                            <h3>Détails de l'annonce</h3>
+                            <div class="form-group mt-5 ml-4">
+                                <h6>Organisation : {{ann.user.profile.organisation}}</h6>
+                                <h6>Localisation : {{ann.localisation}}</h6>
+                                <h6>Durée de location : {{ann.duree_location}}</h6>
+                                <h6>Dates de location : {{ann.date_de_debut}} au {{ann.date_de_fin}}</h6>
+                                {% if ann.avec_operateur == True %}
+                                <h6>Avec opérateur: Oui </h6>
+                                {% else %}
+                                <h6>Avec opérateur: Non </h6>
+                                {% endif %}
+
+                                {% if ann.reprise_livraison == True %}
+                                <h6>Avec livraison & reprise: Oui </h6>
+                                {% else %}
+                                <h6>Avec livraison et reprise: Non </h6>
+                                {% endif %}
+                            </div>
+
+
+                            </div>
+                    </div>
+                </div>
+
+                <!-- Second Half -->
+                <div class="col-md-8 p-0 bg-white   h-md-100 loginarea" style="margin-top:-3%;">
+                    <div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
+                        <div class="card w-75">
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+
+                                    <label for="media-size">Selectionner le type d'engin</label>
+                                    <select class="custom-select" id="media-size">
+                                        <option value="" selected>Type d'engin</option>
+                                         {% for i in item %}
+                                        <option value="{{i.price}}x{{i.slug}}x{{i.disponible}}">{{i.get_label_display}}</option>
+                                         {% endfor %}
+                                    </select>
+                            <br>
+                                    <br>
+
+                            <div class="form-group">
+                                 <label for="prix">Prix de l'engin</label>
+                                <input  type="text" class="form-control media-value" name="prix" id="prix" placeholder="Prix de l'engin">
+                            </div>
+
+                            <div class="form-group">
+                                 <label for="duree_location">Durée de la location</label>
+                                <input  type="text" class="form-control" name="duree_location" id="duree_location" >
+                            </div>
+
+                            <div class="form-group">
+                                 <label for="date_debut_commande">Date de début de location</label>
+                                <input  type="date" class="form-control" name="date_debut_commande" id="date_debut_commande" aria-label="Prix de location" placeholder="Prix de l'engin">
+                            </div>
+
+                            <div class="form-group">
+                                 <label for="date_fin_commande">Durée de la location</label>
+                                <input  type="date" class="form-control" name="date_fin_commande" id="date_fin_commande" aria-label="Prix de location" placeholder="Prix de l'engin">
+                            </div>
+
+                            <div class="form-group">
+                                <input  type="text" class="form-control media-value" name="v" id="title" placeholder="nom de l'engin">
+                            </div>
+
+
+                            <h6>Avec opérateur ?</h6>
+                                <div class="onoffswitch ">
+                                  <input type="checkbox" name="avec_operateur" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                                     <label class="onoffswitch-label" for="myonoffswitch">
+                                         <span class="onoffswitch-inner"></span>
+                                          <span class="onoffswitch-switch"></span>
+                                        </label>
+                                </div>
+
+                                 <h6>Livraison & reprise ?</h6>
+                                 <div class="onoffswitch ">
+                                      <input type="checkbox" name="livraison_reprise" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
+                                      <label class="onoffswitch-label" for="myonoffswitch1">
+                                      <span class="onoffswitch-inner"></span>
+                                      <span class="onoffswitch-switch"></span>
+                                       </label>
+                                  </div>
+
+                                    <button class="btn btn-warning float-right" type="submit" >Envoyer</button>
+                                    <a href="{% url 'omniparc:annonce' %}"  class="btn btn-danger float-right mr-2" type="submit" >Annuler</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+  $('#media-size').change(function() {
+    var selectValue = $(this).val();
+    var arr = selectValue.split("x");
+
+    $('.media-value').each(function(index) {
+      $(this).val(arr[index]);
+    });
+  });
+});
+</script>
+
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{% endblock content %}

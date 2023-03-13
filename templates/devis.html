@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<main>
+  <div class="container" style="margin-top:3%">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+            Devis
+              <strong>{{object.id_devis}}</strong>
+                <span class="float-right">
+
+                    <strong>Status:</strong>
+
+                    {% if not object.is_confirmed %}
+                <a href="{{object.get_add_item_cart}}" class="btn btn-primary">Confimer le devis</a>
+                {% else %}
+                <span>Devis confirmer</span>
+                {% endif %}</span>
+
+
+
+        </div>
+        <div class="card-body">
+          <div class="row mb-4">
+                <div class="col-sm-6">
+                  <h6 class="mb-3">De:</h6>
+                <div>
+                      <strong>{{object.entreprise_emetrice}}</strong>
+                </div>
+                      <div>Mr: {{object.gerant_emeteur}}</div>
+                      <div>Adresse: {{object.adresse_emeteur}}</div>
+                      <div>Email: {{object.email_emeteur}}</div>
+                      <div>Tél: {{object.tel_emeteur}}</div>
+                </div>
+
+                    <div class="col-sm-6">
+                      <h6 class="mb-3">A l'intention de:</h6>
+                        <div>
+                             <strong>{{object.entreprise_reception}}</strong>
+                        </div>
+                    <div>Mr: {{object.gerant_reception}} {{request.user.first_name}}</div>
+                    <div>Adresse: {{object.adreese_chantier}}</div>
+                    <div>Email: {{object.email_reception}}</div>
+                    <div>Tel: {{object.tel_reception}}</div>
+                    </div>
+
+
+
+</div>
+
+    <div class="table-responsive-sm">
+        <table class="table table-striped">
+                <thead>
+                        <tr>
+                        <th class="center">#</th>
+                        <th>Designation</th>
+                        <th class="right">Prix U.</th>
+                        <th class="right">Durée de location</th>
+                        <th class="center">Opérateur ?</th>
+                        <th class="right">Total</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                        <td class="center">1</td>
+                        <td class="left strong">{{object.item}}</td>
+                        <td class="right">{{object.prix_unitaire}} DZD/{{object.mode_location}}</td>
+                        <td class="center">{{object.dure_location}} {{object.mode_location}}</td>
+                        <td class="center">{{object.avec_operateur}}</td>
+                        <td class="right">{{object.montant_location}} DZD</td>
+                        </tr>
+
+                </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-sm-5">
+
+        </div>
+
+    <div class="col-lg-4 col-sm-5 ml-auto">
+        <table class="table table-clear">
+            <tbody>
+                <tr>
+                <td class="left">
+                <strong>Total</strong>
+                </td>
+                <td class="right">
+                <strong>{{object.montant_location}} DZD</strong>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+      </div>
+</main>
+
+{% endblock content %}

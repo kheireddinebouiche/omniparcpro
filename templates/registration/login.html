@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Authentification{% endblock %}
+
+{% block content %}
+
+
+
+ <div class="container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-6">
+
+         <form method="post">
+                        {% csrf_token %}  
+
+                        <h2><center>Connexion</center></h2>
+                      <hr>
+
+                        <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Nom d'utilisateur : </h6>
+                        </label> <input class="form-control mb-4" type="text" name="username" placeholder="Entrer votre nom d'utilisateur"> </div>
+                    <div class="row px-3"> <label class="mb-1">
+                            <h6 class="mb-0 text-sm">Mot de passe :</h6>
+                        </label> <input class="form-control" type="password" name="password" placeholder="Entrer votre mot de passe"> </div>
+                    <div class="row px-3 mb-4">
+                         <a href="/accounts/password_reset" class="ml-auto mb-0 text-sm">Mot de passe oublier ? </a>
+                    </div>
+                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-primary">Se conecter</button> </div>
+                    </form>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+
+{% endblock content %}
+
+
+

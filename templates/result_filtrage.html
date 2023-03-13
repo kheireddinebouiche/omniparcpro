@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<style type="text/css">
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+<div class="container my-5 px-0 z-depth-1">
+
+
+  <!--Section: Content-->
+  <section class="text-center text-lg-left white-text grey p-5"
+    style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background2.jpg);">
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-6 offset-md-0">
+
+          <h3 class="font-weight-bold">{{cat}}</h3>
+
+          <h5 class="h5">{{lab}}</h5>
+
+          <p>Vous avez a votre disposition {{result.count}} engin sous la catégorie.</p>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+<div class="container my-5" style="height:100%;">
+  <!--Section: Content-->
+  <section class="team-section text-center dark-grey-text">
+    <!-- Grid row-->
+    <div class="row text-center text-md-left">
+        {% for r in result %}
+      <!-- Grid column -->
+      <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
+        <div class="avatar mb-md-0 mb-4 mx-4">
+          <img src="{{r.image.url}}" class="rounded z-depth-1" alt="Sample avatar" style="width:155px;height:139px;">
+        </div>
+        <div class="mx-4">
+          <h4 class="font-weight-bold mb-3">{{r.title}}</h4>
+          <h6 class="font-weight-bold grey-text mb-3">{{r.get_category_display}}</h6>
+          <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic
+            tenetur.</p>
+        </div>
+      </div>
+      <!-- Grid column -->
+        {% endfor %}
+
+    </div>
+    <!-- Grid row-->
+
+  </section>
+  <!--Section: Content-->
+
+</div>
+
+
+
+{% endblock content %}

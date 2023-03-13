@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+  body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+<main  style="margin-bottom: 10rem;">
+  <div class="container mb-5 mt-5" >
+      <div class="card">
+        <div class="card-body ml-5 mr-5 mt-5">
+         <div class="container">
+           <div class="table-responsive text-nowrap">
+            <h2> Mes commandes </h2>
+          <table class="table">
+            <thread>
+              <tr>
+                <th scrope="col">#</th>
+                  <th scrope="col">Ref. Commande</th>
+                  <th scrope="col">Ref. Devis</th>
+                <th scrope="col">Designation </th>
+                <th scrope="col">Montant total de votre commande</th>
+                <th scrope="col">Etat de la commande</th>
+              </tr>
+            </thread>
+            <tbody>
+              {% for order_item in commande %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{order_item.item_order_id}}</td>
+                {% if order_item.reference_devis != none %}
+                <td>{{order_item.reference_devis}}</td>
+                {% else %}
+                <td> -- </td>
+                  {% endif %}
+                <td>{{order_item.item.title}}</td>
+                <td><center>{{order_item.montant_total}} DA</center></td>
+                  <td>{{order_item.get_status_display}}</td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="7"><H3>Vous n'aves acutallement aucune commande en cours</H3></td>
+                  <tr>
+                  <td colspan="7">
+                    <b><a href="/" class="btn btn-primary float-right ">Continuer vos commandes</a></b>
+                  </td>
+              </tr>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+ </main>
+
+
+
+
+{% endblock content %}

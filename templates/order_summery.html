@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+</style>
+
+  <!--Carousel Wrapper-->
+ <main  style="margin-bottom: 10rem;">
+  <div class="container mb-5 mt-5" >
+      <div class="card">
+    <div class="card-body ml-5 mr-5 mt-5">
+    <div class="container">
+        <div class="table-responsive text-nowrap">
+            <h2> Mes commandes </h2>
+          <table class="table">
+            <thread>
+              <tr>
+                <th scrope="col">#</th>
+                  <th scrope="col">Ref. Commande</th>
+                <th scrope="col">Designation </th>
+                <th scrope="col">Prix</th>
+                <th scrope="col">Durée location</th>
+                <th scrope="col">Sérvice addiotionnel</th>
+                <th scrope="col">Prix total</th>
+              </tr>
+            </thread>
+            <tbody>
+              {% for order_item in object.items.all %}
+              <tr>
+
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{order_item.item_order_id}}</td>
+                <td>{{order_item.item.title}}</td>
+                <td>{{order_item.item.price}}</td>
+                <td>
+                  {{order_item.duree_location}} / {{order_item.item.get_mode_location_display}}
+                </td>
+
+                  <td>{{order_item.montant_service_adi}} DA</td>
+                <td>{{order_item.montant_total}} DA
+
+                    <a style="color: red;"  href="{% url 'omniparc:remove_from_cart' order_item.item.slug %}">
+                      <i class="fas fa-trash float-right"></i>
+                    </a>
+                </td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="6"><H3>Vous n'aves acutallement aucune commande en cours</H3></td>
+                  <tr>
+                  <td colspan="6">
+                    <b><a href="/" class="btn btn-primary float-right ">Continuer vos commandes</a></b>
+                  </td>
+              </tr>
+                </tr>
+              {% endfor %}
+              {% if object.get_total %}
+
+               <tr>
+                  <td colspan="6"><b><i>Order tatal</i></b></td>
+                  <td><b>{{object.get_total}} DA</b></td>
+
+              </tr>
+              <tr>
+                  <td colspan="7">
+                    <b><a href="/checkout" class="btn btn-warning float-right ml-2">Confimer vos commandes</a></b>
+                    <b><a href="/" class="btn btn-primary float-right ">Continuer vos commandes</a></b>
+                  </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+ </main>
+    
+
+  {% endblock content %}
+

@@ -1,0 +1,19 @@
+{% extends 'backadminpanel/base.html' %}
+
+{% load static %}
+{%block content %}
+<ul>
+   <li>{{object.item.title}}</li>
+   <ul>
+      <li>{{object.addresse_livraison.street_address}}</li>
+      <li>{{object.addresse_livraison.appartement_address}}</li>
+      <li>{{object.addresse_livraison.get_country_display}}</li>
+      <li>{{object.addresse_livraison.zip}}</li>
+      <li>{{object.date_de_demande}}</li>
+   </ul>
+</ul>
+
+
+
+
+{% endblock content %}

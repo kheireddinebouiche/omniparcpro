@@ -1,0 +1,70 @@
+{% extends 'backadminpanel/base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+            <li class="breadcrumb-item active">Liste des articles</li>
+          </ul>
+        </div>
+      </div>
+      <section>
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header> 
+           
+          </header>
+          
+          <div class="row">     
+              <table class="table">
+                <thread>
+                  <tr>
+                    <th scrope="col">#</th>
+                      <th scrope="col">Label</th>
+                    <th scrope="col">Catégorie </th>
+                    <th scrope="col">Nombre de vue</th>
+                    <th scrope="col">Disponibilité</th>             
+                    <th scrope="col">Action</th>
+    
+                  </tr>
+                </thread>
+                <tbody>
+                  {% for i in objects %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.title}}</td>
+                    <td>{{i.get_category_display}}</td>
+                    <td>{{i.view_count}}</td>
+                    <td>{{i.disponible}}</td>
+                    <td>
+                      <center><a href="{{i.update}}" class="btn btn-primary">Modifier</a></center>
+                    </td>
+                  </tr>
+                  {% empty %}
+                    <tr><center>
+                      <td colspan="7"><H3>Vous n'avez actuellement aucun devis.</H3></td></center>
+                      <tr>
+                  </tr>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+        </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Your company &copy; 2017-2020</p>
+            </div>
+            <div class="col-sm-6 text-right">
+              <p>Version 1.4.7</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+{% endblock content %}
