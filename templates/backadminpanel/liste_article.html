@@ -24,7 +24,7 @@
                     <th scrope="col">#</th>
                       <th scrope="col">Label</th>
                     <th scrope="col">Catégorie </th>
-                    <th scrope="col">Nombre de vue</th>
+                    <th scrope="col">Engin</th>
                     <th scrope="col">Disponibilité</th>             
                     <th scrope="col">Action</th>
     
@@ -36,8 +36,12 @@
                     <th scope="row">{{forloop.counter}}</th>
                     <td>{{i.title}}</td>
                     <td>{{i.get_category_display}}</td>
-                    <td>{{i.view_count}}</td>
-                    <td>{{i.disponible}}</td>
+                    <td>{{i.get_label_display}}</td>
+                    {% if i.disponible %}
+                      <td>Disponible</td>
+                    {% else %}
+                     <td>Non disponible</td>
+                    {% endif %}
                     <td>
                       <center><a href="{{i.update}}" class="btn btn-primary">Modifier</a></center>
                     </td>

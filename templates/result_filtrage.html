@@ -45,18 +45,20 @@
   <section class="team-section text-center dark-grey-text">
     <!-- Grid row-->
     <div class="row text-center text-md-left">
-      {% if resul %}
+      {% if result %}
         {% for r in result %}
       <!-- Grid column -->
-      <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-between">
-        <div class="avatar mb-md-0 mb-4 mx-4">
-          <img src="{{r.image.url}}" class="rounded z-depth-1" alt="Sample avatar" style="width:155px;height:139px;">
-        </div>
-        <div class="mx-4">
-          <h4 class="font-weight-bold mb-3">{{r.title}}</h4>
-          <h6 class="font-weight-bold grey-text mb-3">{{r.get_category_display}}</h6>
-        </div>
-      </div>
+      <a href="{{r.get_absolute_url}}" style="text-decoration : none;">
+          <div class="col-lg-6 col-md-12 mb-5 d-md-flex justify-content-start">
+            <div class="avatar mb-md-0 mb-4 mx-4">
+              <img src="{{r.image.url}}" class="rounded z-depth-1" alt="Sample avatar" style="width:155px;height:139px;">
+            </div>
+            <div class="mx-4">
+              <h4 class="font-weight-bold mb-3">{{r.title}}</h4>
+              <h6 class="font-weight-bold grey-text mb-3">{{r.get_category_display}}</h6>
+            </div>
+          </div>
+      </a>
       <!-- Grid column -->
         {% endfor %}
 

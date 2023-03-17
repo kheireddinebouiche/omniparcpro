@@ -812,32 +812,22 @@ li.list-group-item:first-child {
                 <h3 class="h3">{{user}}</h3>
             </div>
             <div class="profile-cover__action bg--img" data-overlay="0.3">
-                <button class="btn btn-rounded btn-info">
-                    <i class="fa fa-plus"></i>
-                    <span>Follow</span>
-                </button>
-                <button class="btn btn-rounded btn-info">
-                    <i class="fa fa-comment"></i>
-                    <span>Message</span>
-                </button>
+                <a href="{% url 'logout' %}">
+                    <button class="btn btn-rounded btn-info">
+                        <i class="fa fa-comment"></i>
+                        <span>Me déconnecter</span>
+                    </button>
+                </a>
             </div>
-            <div class="profile-cover__info">
-                <ul class="nav">
-                    <li><strong>26</strong>Projects</li>
-                    <li><strong>33</strong>Followers</li>
-                    <li><strong>136</strong>Following</li>
-                </ul>
-            </div>
+            
         </div>
         <div class="panel z-depth-1">
-            <div class="panel-heading">
-                <h3 class="panel-title">Activity Feed</h3>
-            </div>
             <div class="col-lg-12">
               <form method="POST" action="{% url 'omniparc:monprofile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-body">
                   <h3 class="card-title">Editer votre profile</h3>
+                  <hr>
                     {{user_form|crispy}}
                     {{profile_form|crispy}}
                   </div>

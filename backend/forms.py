@@ -169,6 +169,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('photo_de_profile','banniere', 'organisation', 'phone_number','adresse_siege','nif','nis')
+        labels = {
+            'phone_number' : "N° Téléphone",
+        }
         widgets = {
             'phone_number': forms.TextInput(attrs={'class': 'phone'})
         }
