@@ -709,6 +709,7 @@ def contactView(request):
             message = form.cleaned_data['message']
             message = from_email + ' à envoyer un email avec le message suivant: \n' + message
             try:
+                
                 send_mail(subject, message, from_email, ['django.send2020@gmail.com'])
 
             except BadHeaderError:
