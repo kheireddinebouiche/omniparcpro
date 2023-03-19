@@ -53,13 +53,14 @@
           <h3 class="font-weight-bold">Répondez aux annonces</h3>
 
           <p class="text-muted">Voici une liste de toutes les annonces déposer sur la plateforme, cliquez sur l'une d'elle pour proposer vos services.</p>
-
+          {% if request.user.is_authenticated and request.user.profile.is_entreprise or request.user.profile.is_particulier %}
+            <a href="{% url 'omniparc:depot-annonce' %}" class="btn btn-success">Déposer une annonce</a>
+          {% endif %}
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
         <div class="col-lg-6 mb-4">
-
           <!--Image-->
           <div class="view overlay z-depth-1-half "style="height:60%;">
             <img src="https://cdn.pixabay.com/photo/2017/06/05/16/24/megaphone-2374502_960_720.png"  class="img-fluid"
@@ -90,31 +91,28 @@
             <hr>
         </div>
 
-                <div class="row wow fadeIn">
+          <div class="row wow fadeIn">
             {% for annonce in annonce_last %}
-            <div class="col-lg-4 col-md-10 mb-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h5>Recherche : {{annonce.article}}</h5>Par {{annonce.user.username}}
-                        </div>
-                        <p>Localisation : {{annonce.localisation}}</p>
+              <div class="col-lg-4 col-md-10 mb-4">
+                  <div class="card mb-3" style="height : 300px;">
+                      <div class="card-body">
+                          <div class="card-title">
+                              <h5>Recherche : {{annonce.article}}</h5>Par {{annonce.user.username}}
+                          </div>
+                          <p>Localisation : {{annonce.localisation}}</p>
 
-                    <div id='foot' class="card-footer">Déposer le : {{annonce.created_date}}
-                      <a id="bt" href="{{ annonce.get_absolute_url }}" class="btn btn-primary">Consulter</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-                {% empty %}
-                    <div class="text-center">
-                        <p>Aucun élement disponible pour le moment </p>
-                    </div>
-
-
-            {% endfor %}
-        </div>
-
+                      <div id='foot' class="card-footer" style="position : absolute; bottom: 0;">Déposer le : {{annonce.created_date}}
+                        <a id="bt" href="{{ annonce.get_absolute_url }}" class="btn btn-primary">Consulter</a>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              {% empty %}
+                  <div class="text-center">
+                      <p>Aucun élement disponible pour le moment </p>
+                  </div>
+              {% endfor %}
+          </div>
 
         <br>
         <br>
@@ -127,7 +125,7 @@
                 <div class="row wow fadeIn">
             {% for annonce in annonce_all %}
             <div class="col-lg-4 col-md-10 mb-4">
-                <div class="card mb-3">
+                <div class="card mb-3" style="height: 300px;">
                     <div class="card-body">
 
                         <div class="card-title">
@@ -136,7 +134,7 @@
                         </div>
 
                              <p>Localisation :{{annonce.localisation}}</p>
-                    <div id='foot' class="card-footer">
+                    <div id='foot' class="card-footer" style="position : absolute; bottom: 0;">
                         Déposer le : {{annonce.created_date}}
 
                         <a id="bt" href="{{ annonce.get_absolute_url }}" class="btn btn-primary">Consulter</a>

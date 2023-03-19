@@ -32,9 +32,11 @@
                             <h6 class="mb-0 text-sm">Mot de passe :</h6>
                         </label> <input class="form-control" type="password" name="password" placeholder="Entrer votre mot de passe"> </div>
                     <div class="row px-3 mb-4">
-                         <a href="/accounts/password_reset" class="ml-auto mb-0 text-sm">Mot de passe oublier ? </a>
+                         <a href="/accounts/password_reset" class="ml-auto mt-1 mb-0 text-sm">Mot de passe oublier ? </a>
                     </div>
                     <div class="row mb-3 px-3"> <button type="submit" class="btn btn-primary">Se conecter</button> </div>
+                    <hr>
+                    <p>Vous n'avez de compte ?<a href="{% url 'omniparc:plan-choice' %}" > Inscrivez-vous </a></p>
                     </form>
 
         </div>

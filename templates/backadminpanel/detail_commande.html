@@ -1,8 +1,21 @@
 {% extends 'backadminpanel/base.html' %}
 
 {% load static %}
-{%block content %}
+{% block content %}
+
+{{object.avec_operateur}}<br><br>
+{{object.reprise_livraison}}<br><br>
+{{object.duree_location}}<br><br>
+{{object.prix_unitaire}}<br><br>
+{{object.montant_total}}<br><br>
+{{object.montant_service_adi}}<br><br>
+{{object.date_debut_commande}}<br><br>
+{{object.date_fin_commande}}<br><br>
+
+
 <ul>
+
+
    <li>{{object.item.title}}</li>
    <ul>
       <li>{{object.addresse_livraison.street_address}}</li>
@@ -13,7 +26,7 @@
    </ul>
 </ul>
 
-
+{{object.user}}
 
 
 {% endblock content %}

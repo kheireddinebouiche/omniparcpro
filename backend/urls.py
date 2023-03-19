@@ -51,6 +51,9 @@ urlpatterns = [
     path('mon_profile/',update_profile_gen,name='monprofile'),
     path('mes_annonces/',view_annonce_responde_particulier,name='mes_annonces'),
     path('mes_annonces/annonces_responses/<slug>',view_responde,name='annonce_responses'),
+    path('annonces/details-reponse/<int:pk>/', details_responde, name="details_reponse"),
+    path('annonces/update_annonce/<slug>/', update_annonce, name="update_annonce"),
+    path('annonces/delete-annonce/<slug>/', delete_annonce, name="delete_annonce"),
     path('view-count/', ViewCount, name="view-count"),
     path('reenitialiser-vue/<slug>/', ZeroVueItem, name="zero-vue"),
 

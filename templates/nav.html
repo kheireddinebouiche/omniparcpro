@@ -37,12 +37,12 @@
             </a>
           </li>
             {% if user.is_authenticated %}
-            {% if user.profile.is_entreprise or user.profile.is_offre %}
+            
             <li class="nav-item">
             <a class="nav-link waves-effect" href="{% url 'omniparc:annonce' %}">Annonces
             </a>
           </li>
-            {% endif %}
+          
             {% endif %}
 
                 <!-- PROFILE DROPDOWN - scrolling off the page to the right -->

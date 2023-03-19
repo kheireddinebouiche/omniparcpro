@@ -21,7 +21,7 @@
   <!--Section: Content-->
   <section class="team-section text-center dark-grey-text">
 
-    <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Entreprise</h6>
+    <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Entreprises</h6>
     <!-- Section heading -->
     <h2 class="font-weight-bold text-center dark-grey-text pb-2">Nos client qui nous font confiance</h2>
     <hr class="w-header my-4">
@@ -36,16 +36,22 @@
           <div class="col-md-4 mb-4">
 
             <div class="w-200 mx-auto mb-4">
-              <img src="{{ent.user.profile.photo_de_profile.url}}" style="width:150px; height:120px;" class="z-depth-1 rounded-circle img-fluid" alt="{{ent.organisation}}">
-            </div>
-              <h6 class="font-weight-bold"> <a href="{{ent.get_profile_details}}" >{{ent.organisation}}</a></h6>
 
-              <ul class="list-unstyled d-flex justify-content-center mt-3 mb-0 red-text">
-              <li><i class="fab fa-twitter mx-2"></i></li>
-              <li><i class="fab fa-facebook-f mx-2"></i></li>
-              <li><i class="fab fa-instagram mx-2"></i></li>
-              <li><i class="fab fa-linkedin-in mx-2"></i></li>
-            </ul>
+              {% if ent.user.profile.photo_de_profile.url != Null %}
+
+                <img src="{{ent.user.profile.photo_de_profile.url}}" style="width:145px; height:120px;" class="z-depth-1 rounded-circle img-fluid" alt="{{ent.organisation}}">
+              
+                {% else %}
+
+                <img src="{% static 'img/profile.png' %}" style="width:140px; height:125px;" class="z-depth-1 rounded-circle img-fluid" alt="{{ent.organisation}}">
+              
+              {% endif %}
+
+            </div>
+              <h6 class="font-weight-bold"> 
+                <a href="{{ent.get_profile_details}}" >{{ent.organisation}}</a>
+              </h6>
+              
 
           </div>
           <!-- Grid column -->

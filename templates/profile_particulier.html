@@ -805,10 +805,14 @@ li.list-group-item:first-child {
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container mt-3 " >
-    <div class="col-lg-12">
-        <div class="panel profile-cover z-depth-2">
+    <div class="col-lg-12" >
+        <div class="panel profile-cover z-depth-2"  style="height: 320px;">
             <div class="profile-cover__img">
-                <img src="{{user.profile.photo_de_profile.url}}" alt="" />
+                {% if user.profile.photo_de_profile.url != Null %}
+                    <img src="{{user.profile.photo_de_profile.url}}" alt="" />
+                {% else %}
+                    <img src="{% static 'img/profile.png' %}" alt="" />
+                {% endif %}
                 <h3 class="h3">{{user}}</h3>
             </div>
             <div class="profile-cover__action bg--img" data-overlay="0.3">
@@ -826,7 +830,7 @@ li.list-group-item:first-child {
               <form method="POST" action="{% url 'omniparc:monprofile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-body">
-                  <h3 class="card-title">Editer votre profile</h3>
+                  <h3 class="card-title">Editer votre profile</h3></div>
                   <hr>
                     {{user_form|crispy}}
                     {{profile_form|crispy}}

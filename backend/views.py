@@ -238,7 +238,9 @@ def add_to_cart(request, slug):
             order = Order.objects.create(user=request.user, ordered_date=ordered_date, )
             order.items.add(order_item)
             messages.info(request, "Cette article vien d'étre ajouter a votre panier")
-                
+            return redirect("omniparc:order_summery")
+
+                       
 ###############################################################################################
 @transaction.atomic
 @login_required
@@ -497,7 +499,7 @@ def RegisterParticulier(request):
             user.profile.organisation = form.cleaned_data.get('organisation')
             user.profile.adresse_siege = form.cleaned_data.get('adresse_siege')
             user.profile.is_particulier = True
-            user.profile.photo_de_profile = 'media.png'
+            user.profile.photo_de_profile = 'img/profile.png'
             user.profile.banniere = 'banniere_default.JPG'
 
             user.save()
@@ -542,7 +544,7 @@ def RegisterEntreprise_offre(request):
             user.profile.nis = form.cleaned_data.get('nis')
             user.profile.is_offre = True
             user.profile.note = True
-            user.profile.photo_de_profile = 'media.png'
+            user.profile.photo_de_profile = 'img/profile.png'
             user.profile.banniere = 'banniere_default.JPG'
             user.save()
 
@@ -586,7 +588,7 @@ def RegisterEntreprise(request):
             user.profile.nis = form.cleaned_data.get('nis')
             user.profile.is_entreprise = True
             user.profile.note = True
-            user.profile.photo_de_profile = 'media.png'
+            user.profile.photo_de_profile = 'img/profile.png'
             user.profile.banniere = 'banniere_default.JPG'
             user.save()
 
@@ -710,7 +712,7 @@ def contactView(request):
             message = from_email + ' à envoyer un email avec le message suivant: \n' + message
             try:
                 
-                send_mail(subject, message, from_email, ['django.send2020@gmail.com'])
+                send_mail(subject, message, from_email, ['omniparc@saldaesystems.com'])
 
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
@@ -766,7 +768,7 @@ def search(request):
 ######################################################################################
 def list_commande(request):
     commande = OrderItem.objects.filter(item__user=request.user)
-    print(commande)
+
     context = {
         'commande': commande
     }
@@ -794,6 +796,7 @@ def Devis(request, slug):
     if request.method == 'POST':
         forme = DevisForm(request.POST)
         if forme.is_valid():
+
             duree_location = forme.cleaned_data['duree_location']
             adresse_livraison = forme.cleaned_data['adresse_livraison']
             avec_operateur = forme.cleaned_data.get('avec_operateur')
@@ -962,6 +965,8 @@ def detail_annonce(request, slug):
 
 ##########################################################################################
 
+
+@login_required(login_url='login')
 def view_annonce(request):
     annonce_last = Annonce.objects.order_by('-created_date')[:3]
     annonce_all = Annonce.objects.all()
@@ -971,7 +976,8 @@ def view_annonce(request):
     }
     return render(request, 'view_annonce.html', context)
 
-
+@login_required(login_url='login')
+@transaction.atomic
 def create_annonce(request):
     form = AnnonceForm()
     if request.method == 'POST':
@@ -980,6 +986,14 @@ def create_annonce(request):
             annonce = forme.save(commit=False)
             annonce.user = request.user
             annonce.save()
+
+            subject = "Annonce"
+            message = "Une annonce à été déposer la plateforme, veuillez vérifier votre compte pour plus d'information."
+            from_email = "omniparc@saldaesystems.com"
+
+            for user in User.objects.all().exclude(request.user.email):
+                send_mail(subject, message, from_email, [user.email])
+
             messages.success(request,'Votre annonce à été publier avec succées')
             return redirect('omniparc:home')
         else:
@@ -988,6 +1002,49 @@ def create_annonce(request):
         'form': form
     }
     return render(request, 'annonce_creation.html', context)
+
+@login_required(login_url='login')
+@transaction.atomic
+def update_annonce(request, slug):
+    item = get_object_or_404(Annonce, slug=slug)
+    form = AnnonceForm(instance=item)
+    if request.method == 'POST':
+        form= AnnonceForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Les modifications ont été enregistrer.")
+            return redirect('omniparc:home')
+        
+    else:
+        context={
+            'form': form,
+            'item' : item,
+        }
+
+        return render(request, 'update_annonce.html', context)
+
+
+@login_required(login_url='login')
+@transaction.atomic
+def delete_annonce(request, slug):
+    item = get_object_or_404(Annonce, slug = slug)
+
+    try:
+        responde = Annonce_responde.objects.filter(slug_annonce = item.slug)
+
+        for i in responde:
+            i.delete()
+
+        item.delete()
+        messages.success(request, "Votre annonce à été supprimé avec succès.")
+        return redirect('omniparc:')
+    
+    except:
+
+        item.delete()
+        messages.success(request, "Votre annonce à été supprimé avec succès.")
+        return redirect('omniparc:')
+
 
 ###########################################################################
 def view_annonce_responde_particulier(request):
@@ -1010,6 +1067,12 @@ def view_responde(request,slug):
     return render(request,'voir_responde_annonce.html', context)
 
 
+def details_responde(request, pk):
+    result = Annonce_responde.objects.get(id = pk)
+    context = {
+        'result' : result
+    }
+    return render(request, 'details-reponse-annonce.html', context)
 ###########################################################################
 
 def how_it_works(request):
@@ -1038,8 +1101,6 @@ def View_ets_profile(request, slug):
         'item' : item,
     }
     return render(request, 'profile_view_entreprise.html', context)
-
-
 
 #############################################################################
 def filter_camion_nacelle_pi(request):
@@ -1150,7 +1211,6 @@ def filter_nel(request):
     }
     return render(request,'result_filtrage.html', context)
 
-
 def filter_b(request):
     result = Item.objects.filter(label='B')
     cat = "Terassement & Extraction"
@@ -1248,7 +1308,6 @@ def filter_gt(request):
         'lab': lab
     }
     return render(request,'result_filtrage.html', context)
-
 
 def filter_gmv(request):
     result = Item.objects.filter(label='GMV')

@@ -15,15 +15,21 @@
       <section class="forms">
         <div class="container">
           <!-- Page Header-->
-          <header> 
-            <h1 class="h3 display">Profile</h1>
-          </header>
+         
           <div class="row" style="width:70% ;margin-left:15%;">
             <div class="col-lg-12">
               <div class="card card-profile">
                 <div style="background-image: url({{user.profile.banniere.url}});" class="card-header"></div>
                 <div class="card-body text-center"><img src="{{user.profile.photo_de_profile.url}}" class="card-profile-img">
                   <h3 class="mb-3">{{user.profile.organisation}}</h3>
+                  <h4>
+                    {% if request.user.profile.is_entreprise %}
+                      <a href="#" class="btn btn-success float-right"><b>Compte entreprise</b></a>
+                    {% endif %}
+                    {% if request.user.profile.offer %}
+                      <a href="#" class="btn btn-success float-right"><b>Compte offre</b></a>
+                  {% endif %}
+                  </h4>
                 </div>
               </div>
 
@@ -32,7 +38,9 @@
               <form class="card" method="POST" action="{% url 'omniparc:update-profile' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="card-body">
-                  <h3 class="card-title">Editer votre profile</h3>                
+                  <h3 class="card-title">Editer votre profile</h3>
+                  
+                  <hr>                
                     {{user_form|crispy}}
                     {{profile_form|crispy}}
                   </div>                          

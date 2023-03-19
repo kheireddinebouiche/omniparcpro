@@ -73,9 +73,13 @@
 
 <main id='esp'>
     <div class="container py-4" style="width:55rem;">
-        <div  class="card mt-5 py-5">
+        <div  class="card mt-2 py-5">
             <div class="card-body ">
-                <div class="card-title">Veuillez remplir le formulaire afin de déposer votre annonce</div>
+                <div class="card-title">
+                    <h2>Anonnce</h2>
+                    <hr>
+                    <p>Veuillez remplir le formulaire afin de déposer votre annonce</p> 
+                </div>
                 <form method="post">{% csrf_token %}
                     <div class="form-group">
                         <label for="article">Renseigner le type d'engin que vous rechercher</label>

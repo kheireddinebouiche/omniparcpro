@@ -401,7 +401,7 @@
       <!--Section: Products v.3-->
         <div class="card border-0 mb-2  "  >
             <div class="card-body ">
-                <div class="card-title text-center mb-4"><h4>Nos 6 derniers engins</h4> <p>Une liste des 6 derniers engin sur la plateforme</p><hr style="width:500px;"></div>
+                <div class="card-title text-center mb-4"><h4>Nos 6 derniers engins</h4> <p class="text-big grey-text">Une liste des 6 derniers engin sur la plateforme</p><hr style="width:500px;"></div>
                 <section class="mb-4">
                     <div class="row wow fadeIn ">
                       {% for item in object_list %}
@@ -486,13 +486,17 @@
 
       <div class="container mb-5 my-4 p-2 z-depth-2 ">
              <section class="section mt-5">
-              <div class="container">
+              <div class="container py-4">
                 <div class="row">
+                  
                   <div class="col-md-6">
+                    <center>
                     <div>
-                      <img alt="Web Studio" class="img-fluid" src="https://raw.githubusercontent.com/solodev/vertically-centering/master/images/vc-img-1.jpg" />
+                      <img alt="Web Studio" style="height: 350px; width: 410px;" class="img-fluid" src="{% static 'img/how_it_works.png' %}" />
                     </div>
+                   </center>
                   </div>
+                
                   <div class="col-md-6 col-lg-5 ml-auto d-flex align-items-center mt-4 mt-md-0">
                     <div>
                       <h2>Comment ça marche</h2>
@@ -530,7 +534,8 @@
 
           <form  method = 'POST' action="{% url 'marketing:subscribe' %}">
                <!-- Section heading -->
-          <h3 class="font-weight-bold my-3">Abonnez vous </h3>
+          <h3 class="font-weight-bold my-3">Abonnez vous à notre newsletter </h3>
+          <p class="text-big grey-text"> Recevez l'actualité du monde du BTPS, annonces et autres.</p>
               {% csrf_token %}
               {{form|crispy}}
            <button class="btn btn-primary float-right" type="submit" value = "Subscribe" id = "email_submit">Subscribe</button>

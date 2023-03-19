@@ -1,0 +1,118 @@
+
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style type="text/css">
+    #esp {
+      margin-bottom: 24%;
+    }
+    .card-title {
+      text-align : center;
+      font-size : 28px;
+    }
+    body {
+
+     font-family : Lucida, sans-serif;
+    }
+
+        @media (min-width: 768px) {
+    .h-md-100 { height: 100vh; }
+}
+.btn-round { border-radius: 30px; }
+.bg-indigo { background: #0275d8; }
+.text-cyan { color: #35bdff; }
+
+.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "OUI";
+    padding-left: 10px;
+    background-color: #0275d8; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "NON";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+</style>
+
+
+<main id='esp'>
+    <div class="container py-4" style="width:55rem;">
+        <div  class="card mt-2 py-3">
+
+            <div class="card-header">
+                <div class="card-title">
+                    <h2>Détails de la proposition</h2>
+            
+                </div>
+            </div>  
+            <div class="card-body ">
+        
+                
+
+                    {{result.slug_annonce}} <br>
+                    {{result.auteur}} <br>
+                    {{result.created_date}} <br>
+                    {{result.item}} <br>
+                    {{result.duree_location}} <br>
+
+            </div>
+            <div class="card-footer">
+
+                <a href="" class="btn btn-primary float-right"> Confirmer la propostion </a>
+
+                <a href="" class="btn btn-red float-right"> Rejeter la proposition </a>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+   
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+</main>
+
+
+
+{% endblock content %}
+
+

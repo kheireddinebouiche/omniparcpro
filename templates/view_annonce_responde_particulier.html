@@ -25,7 +25,10 @@
                 <div class="media">
 
                   <div class="media-body">
-                    <h6 class="mt-1 font-weight-bold ml-3"><a href="#!">{{i.article}}</a><a><span class="badge badge-warning float-right"><a href="{{i.get_response}}" class="btn btn-primary float-right">Voir les réponses</a></span></a></h6>
+                    <h6 class="mt-1 font-weight-bold ml-3"><a href="#!">{{i.article}}</a>
+                      <a href="{{i.update_annonce}}" class="btn btn-warning float-right p-3">Modifier</a>
+                      <a href="{{i.get_response}}" class="btn btn-primary float-right p-3">Voir les réponses</a>
+                    </h6>
                     <p class="text-muted ml-4">{{i.created_date}}</p>
                   </div>
                 </div>

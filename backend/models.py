@@ -234,6 +234,16 @@ class Annonce(models.Model):
         self.slug = slugify(self.created_date)
         super(Annonce, self).save(*args, **kwargs)
 
+    def delete_annonce(self):
+        return reverse('omniparc:delete_annonce', kwargs={
+            'slug' : self.slug
+        })
+
+    def update_annonce(self):
+        return reverse('omniparc:update_annonce', kwargs={
+            'slug': self.slug
+        })
+
     def get_absolute_url(self):
         return reverse("omniparc:details_de", kwargs={
             'slug': self.slug
@@ -276,8 +286,6 @@ class Annonce_responde(models.Model):
 
     def __str__(self):
         return self.slug_annonce
-
-
 
 
 def increment_order_id_number():
