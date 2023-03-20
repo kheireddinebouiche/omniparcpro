@@ -107,7 +107,6 @@ class Profile(models.Model):
     nis = models.CharField(max_length=30, null=True, blank=True)
     banniere = models.ImageField(null=True, blank=True)
     slug = models.SlugField(max_length=100, null=True, blank=True)
-
     note = models.BooleanField(default=False)
 
     @receiver(post_save, sender=User)
@@ -131,10 +130,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=100, unique=True)
+    reference = models.CharField(max_length=1000, null=True, blank=True)
     price = models.FloatField(null=True)
     prix_avec_operateur = models.FloatField(null=True, blank=True)
     prix_avec_livraison_reprise = models.FloatField(null=True, blank=True)
@@ -162,6 +161,8 @@ class Item(models.Model):
     view_count = models.IntegerField(default=0,null=True,blank=True)
 
 
+    is_approuved = models.BooleanField(default=False, blank=True, null=True)
+    commentaire = models.CharField(max_length=10000,blank=True, null=True)
 
     class Meta:
         ordering = ["title"]
@@ -213,7 +214,25 @@ class Item(models.Model):
         return reverse("omniparc:remove_from_cart", kwargs={
             'slug': self.slug
         })
+    
+    def signalement_item(self):
+        return reverse('omniparc:signale_items', kwargs={
+            'slug' : self.slug
+        })
 
+class SignaledItems(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True)
+
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    motifs = models.CharField(max_length=1000,blank=True, null=True)
+
+
+    class Meta:
+        verbose_name="Signalement de l'article"
+        verbose_name_plural = "Signalements des articles"
+
+    def __str__(self):
+        return self.user.username
 
 class Annonce(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -229,6 +248,10 @@ class Annonce(models.Model):
 
     avec_operateur = models.BooleanField(null=True, blank=True, default=False)
     reprise_livraison = models.BooleanField(null=True, blank=True, default=False)
+
+    is_approuved = models.BooleanField(blank=True, null=True, default=False)
+    is_rejected = models.BooleanField(blank=True, null=True)
+    commentaire = models.CharField(max_length=100000, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.created_date)
@@ -280,13 +303,14 @@ class Annonce_responde(models.Model):
     is_approuved = models.BooleanField(default=False)
     is_choosed = models.BooleanField(default=False)
 
+    commentaire = models.CharField(max_length=10000, null=True, blank=True)
+
     def approuve(self):
         self.approuved_proposition = True
         self.save()
 
     def __str__(self):
         return self.slug_annonce
-
 
 def increment_order_id_number():
         dernier_nomber = OrderItem.objects.all().order_by('id').last()
@@ -299,7 +323,6 @@ def increment_order_id_number():
         n_item_order_id = 'I-OMN/' + str(n_item_order_nb)
         return n_item_order_id
 
-
 def increment_devis_id_number():
     dernier_nomber = DevisItem.objects.all().order_by('id').last()
     if not dernier_nomber:
@@ -309,7 +332,6 @@ def increment_devis_id_number():
     n_item_order_nb = item_order_nb + 1
     n_item_order_id = 'I-OMN/DEVIS' + str(n_item_order_nb)
     return n_item_order_id
-
 
 class DevisItem(models.Model):
     id_devis = models.CharField(max_length=1000, default=increment_devis_id_number, null=True, blank=True)
@@ -374,7 +396,6 @@ class DevisItem(models.Model):
         return reverse("omniparc:confirm_devis_add_cart", kwargs={
             'slug' : self.slug
         })
-
 
 class OrderItem(models.Model):
     item_order_id = models.CharField(max_length=1000, default=increment_order_id_number, null=True, blank=True)
@@ -443,7 +464,6 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.det_tot()
         return total
-
 
 class BillingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -19,8 +19,17 @@
           <div class="row" style="width:70% ;margin-left:15%;">
             <div class="col-lg-12">
               <div class="card card-profile">
-                <div style="background-image: url({{user.profile.banniere.url}});" class="card-header"></div>
-                <div class="card-body text-center"><img src="{{user.profile.photo_de_profile.url}}" class="card-profile-img">
+                {% if user.profile.banniere.url != Null %}
+                  <div style="background-image: url({{user.profile.banniere.url}});" class="card-header"></div>
+                {% else %}
+                  <div style="background-colot: white;" class="card-header"></div>
+                {% endif %}
+
+                {% if user.profile.photo_de_profile.url != Null  %}
+                  <div class="card-body text-center"><img src="{{user.profile.photo_de_profile.url}}" class="card-profile-img">
+                {% else %}
+                  <div class="card-body text-center"><img src="{% static 'img/profile.png' %}" class="card-profile-img">
+                {% endif %}
                   <h3 class="mb-3">{{user.profile.organisation}}</h3>
                   <h4>
                     {% if request.user.profile.is_entreprise %}

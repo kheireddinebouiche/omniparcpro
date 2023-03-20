@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 
+{% block title %} omp {% endblock title %}
 {% load static %}
 
 {% block content %}
 
 <style type="text/css">
     body {
-
+        margin-top:20px;
      font-family : Lucida, sans-serif;
     }
     /* Profile_page */
-body{
 
- margin-top:20px;
-}
 .profile-cover {
     position: relative;
     z-index: 0;
@@ -815,7 +813,7 @@ li.list-group-item:first-child {
                 <h3 class="h3">{{object.organisation}}</h3>
             </div>
             {% if request.user != object.user %}
-            <div class="profile-cover__action bg--img" data-overlay="0.3" style="position: absolute; bottom: 0; right: 0;">
+            <div class="profile-cover__action bg--img"  data-overlay="0.3" style="position: absolute; bottom: 0; right: 0; ">
                 <button class="btn btn-rounded btn-info">
                     <i class="fa fa-comment"></i>
                     <span><a href="mailto:{{object.user.email}}" style="color: white;">Contacter</a></span>
@@ -836,7 +834,9 @@ li.list-group-item:first-child {
 
                                 {% else %}
                                     {% for item in item %}
+                                         
                                             <div class="col-lg-4 mb-4" >
+                                                <a href="{{item.get_absolute_url}}">
                                                 <div class="card" style="height: 350px;">
                                                 <div
                                                     class="avatar w-100 white d-flex justify-content-center align-items-center">
@@ -847,7 +847,9 @@ li.list-group-item:first-child {
                                                     <p class="text-muted">{{item.get_category_display}}</p>
                                                 </div>
                                                 </div>
+                                            </a>
                                             </div>
+                                          
                                     {% endfor %}
                                 {% endif %}
                             </div>

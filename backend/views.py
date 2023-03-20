@@ -25,8 +25,7 @@ from django.views.generic.edit import FormMixin
 from marketing.forms import EmailSignUpForm
 from .forms import CheckoutForm, AddItems, UserForm, ProfileForm,  ContactForm, ItemUpdate, DevisForm, \
     ReservationFrom, Update_commande, AnnonceForm, RespondeAnnonce, SignUpForm_particulier, SignUpForm_entreprise
-from .models import Item, OrderItem, Order, BillingAddress, Profile, ShippingAddress, DevisItem, Annonce, \
-    Annonce_responde
+from .models import *
 from .token_generator import account_activation_token
 from .filter import ItemFilter
 
@@ -399,13 +398,11 @@ class ItemDetailAdministration(DetailView):
     model = Item
     template_name = "backadminpanel/admin_product_detail.html"
 
-
 ##############################################################################################
 
 class Profile_admin(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         return render(self.request, "backadminpanel/pages-profile.html")
-
 
 ##############################################################################################
 @login_required(login_url='/accounts/login')
@@ -472,6 +469,7 @@ class Add_Item(LoginRequiredMixin, View):
                 prix_avec_operateur = prix_avec_operateur,
                 prix_avec_livraison_reprise = prix_avec_livraison_reprise,
                 disp = disp,
+                is_approuved = False,
 
             )
             item.save()
@@ -482,7 +480,20 @@ class Add_Item(LoginRequiredMixin, View):
             return redirect('omniparc:add-item')
             
 
-            
+login_required(login_url='login')
+@transaction.atomic
+def Signale_Item(request, slug):
+    item = get_object_or_404(Item, slug = slug)
+    signale = SignaledItems(
+        user = request.user,
+        item = item,
+    )
+
+    signale.save()
+    messages.success(request, "Le signalement de l'article à été envoyé.")
+    return redirect('omniparc:products', slug)
+
+
 ################################################################################################
 @transaction.atomic
 @csrf_protect
@@ -610,7 +621,6 @@ def RegisterEntreprise(request):
     else:
         form = SignUpForm_entreprise()
     return render(request, 'register.html', {'form': form})
-
 
 def activate_account(request, uidb64, token):
     try:
@@ -965,11 +975,10 @@ def detail_annonce(request, slug):
 
 ##########################################################################################
 
-
 @login_required(login_url='login')
 def view_annonce(request):
-    annonce_last = Annonce.objects.order_by('-created_date')[:3]
-    annonce_all = Annonce.objects.all()
+    annonce_last = Annonce.objects.filter(is_approuved = True).order_by('-created_date')[:3]
+    annonce_all = Annonce.objects.filter(is_approuved = True)
     context = {
         'annonce_last' : annonce_last,
         'annonce_all' : annonce_all
@@ -985,6 +994,7 @@ def create_annonce(request):
         if forme.is_valid():
             annonce = forme.save(commit=False)
             annonce.user = request.user
+            annonce.is_approuved = False
             annonce.save()
 
             subject = "Annonce"
@@ -1051,7 +1061,6 @@ def view_annonce_responde_particulier(request):
     annonce = Annonce.objects.filter(user=request.user).order_by('-created_date')[:100]
     context = {
         'annonce' : annonce,
-
     }
     return render(request,'view_annonce_responde_particulier.html', context)
 
@@ -1090,10 +1099,11 @@ def about_us(request):
 def faq(request):
     return render(request, 'about_us.html')
 
+login_required(login_url='login')
 def View_ets_profile(request, slug):
     profile = get_object_or_404(Profile , slug=slug)
     i = OrderItem.objects.filter(item__user__profile__nif=slug)
-    item = Item.objects.filter(user__profile=profile)
+    item = Item.objects.filter(user__profile=profile, is_approuved = True)
 
     context= {
         'object': profile,
@@ -1104,7 +1114,7 @@ def View_ets_profile(request, slug):
 
 #############################################################################
 def filter_camion_nacelle_pi(request):
-    result = Item.objects.filter(label='CNP')
+    result = Item.objects.filter(label='CNP', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Camion nacelle PL"
 
@@ -1116,7 +1126,7 @@ def filter_camion_nacelle_pi(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_camion_nacelle_vi(request):
-    result = Item.objects.filter(label='CNV')
+    result = Item.objects.filter(label='CNV', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Camion nacelle VL"
 
@@ -1128,7 +1138,7 @@ def filter_camion_nacelle_vi(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_er(request):
-    result = Item.objects.filter(label='ER')
+    result = Item.objects.filter(label='ER', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Echaffaudage roulant"
 
@@ -1140,7 +1150,7 @@ def filter_er(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_na(request):
-    result = Item.objects.filter(label='NA')
+    result = Item.objects.filter(label='NA', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle araignée"
 
@@ -1152,7 +1162,7 @@ def filter_na(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_nar(request):
-    result = Item.objects.filter(label='NAR')
+    result = Item.objects.filter(label='NAR', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle Articulé"
 
@@ -1164,7 +1174,7 @@ def filter_nar(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_nc(request):
-    result = Item.objects.filter(label='NC')
+    result = Item.objects.filter(label='NC', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle ciseaux"
 
@@ -1176,7 +1186,7 @@ def filter_nc(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_nt(request):
-    result = Item.objects.filter(label='NT')
+    result = Item.objects.filter(label='NT', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle Télescopique"
 
@@ -1188,7 +1198,7 @@ def filter_nt(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_ntc(request):
-    result = Item.objects.filter(label='NTC')
+    result = Item.objects.filter(label='NTC', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle Toucon"
 
@@ -1200,7 +1210,7 @@ def filter_ntc(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_nel(request):
-    result = Item.objects.filter(label='NEL')
+    result = Item.objects.filter(label='NEL', is_approuved =  True)
     cat = "Travaux en hauteur"
     lab = "Nacelle Elavatrice"
 
@@ -1212,7 +1222,7 @@ def filter_nel(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_b(request):
-    result = Item.objects.filter(label='B')
+    result = Item.objects.filter(label='B', is_approuved =  True)
     cat = "Terassement & Extraction"
     lab = "Buldozer"
 
@@ -1224,7 +1234,7 @@ def filter_b(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_c(request):
-    result = Item.objects.filter(label='C')
+    result = Item.objects.filter(label='C', is_approuved =  True)
     cat = "Terassement & Extraction"
     lab = "Chargeuse"
 
@@ -1236,7 +1246,7 @@ def filter_c(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_mc(request):
-    result = Item.objects.filter(label='MC')
+    result = Item.objects.filter(label='MC', is_approuved =  True)
     cat = "Terassement & Extraction"
     lab = "Mini Chargeuse"
 
@@ -1248,7 +1258,7 @@ def filter_mc(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_mp(request):
-    result = Item.objects.filter(label='MP')
+    result = Item.objects.filter(label='MP', is_approuved =  True)
     cat = "Terassement & Extraction"
     lab = "Mini Pelle"
 
@@ -1260,7 +1270,7 @@ def filter_mp(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_p(request):
-    result = Item.objects.filter(label='P')
+    result = Item.objects.filter(label='P', is_approuved =  True)
     cat = "Terassement & Extraction"
     lab = "Pelleteuse"
 
@@ -1274,7 +1284,7 @@ def filter_p(request):
 
 #################################################################################
 def filter_ch(request):
-    result = Item.objects.filter(label='CH')
+    result = Item.objects.filter(label='CH', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Chariot Elevateur"
 
@@ -1286,7 +1296,7 @@ def filter_ch(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_ct(request):
-    result = Item.objects.filter(label='CT')
+    result = Item.objects.filter(label='CT', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Chariot Télescopique"
 
@@ -1298,7 +1308,7 @@ def filter_ct(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_gt(request):
-    result = Item.objects.filter(label='GT')
+    result = Item.objects.filter(label='GT', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Gerbeur & Transpalette"
 
@@ -1310,7 +1320,7 @@ def filter_gt(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_gmv(request):
-    result = Item.objects.filter(label='GMV')
+    result = Item.objects.filter(label='GMV', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Glas lift : Monte Vitre"
 
@@ -1322,7 +1332,7 @@ def filter_gmv(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_g(request):
-    result = Item.objects.filter(label='G')
+    result = Item.objects.filter(label='G', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Grue Mobile"
 
@@ -1334,7 +1344,7 @@ def filter_g(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_gsr(request):
-    result = Item.objects.filter(label='GSR')
+    result = Item.objects.filter(label='GSR', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Grue sur remorque"
 
@@ -1346,7 +1356,7 @@ def filter_gsr(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_mga(request):
-    result = Item.objects.filter(label='MGA')
+    result = Item.objects.filter(label='MGA', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Mini Grue Araigné"
 
@@ -1358,7 +1368,7 @@ def filter_mga(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_mgb(request):
-    result = Item.objects.filter(label='MGB')
+    result = Item.objects.filter(label='MGB', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Mini Grue Araigné"
 
@@ -1370,7 +1380,7 @@ def filter_mgb(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_mca(request):
-    result = Item.objects.filter(label='MCA')
+    result = Item.objects.filter(label='MCA', is_approuved =  True)
     cat = " Levage & Manutention"
     lab = "Monte Charge"
 
@@ -1382,7 +1392,7 @@ def filter_mca(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_be(request):
-    result = Item.objects.filter(label='BE')
+    result = Item.objects.filter(label='BE', is_approuved =  True)
     cat = " Chargement & transport "
     lab = "Benne"
 
@@ -1394,7 +1404,7 @@ def filter_be(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_cb(request):
-    result = Item.objects.filter(label='CB')
+    result = Item.objects.filter(label='CB', is_approuved =  True)
     cat = " Chargement & transport "
     lab = "Camion Benne"
 
@@ -1406,7 +1416,7 @@ def filter_cb(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_cbg(request):
-    result = Item.objects.filter(label='CBG')
+    result = Item.objects.filter(label='CBG', is_approuved =  True)
     cat = " Chargement & transport "
     lab = "Camion Bras de grue"
 
@@ -1418,7 +1428,7 @@ def filter_cbg(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_tom(request):
-    result = Item.objects.filter(label='TOM')
+    result = Item.objects.filter(label='TOM', is_approuved =  True)
     cat = " Chargement & transport "
     lab = "Tombereau"
 
@@ -1430,7 +1440,7 @@ def filter_tom(request):
     return render(request,'result_filtrage.html', context)
 
 def filter_rb(request):
-    result = Item.objects.filter(label='RB')
+    result = Item.objects.filter(label='RB', is_approuved =  True)
     cat = "Gros oeuvre & démolition "
     lab = "Robot de démolition"
 

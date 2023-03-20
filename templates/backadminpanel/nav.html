@@ -6,7 +6,14 @@
         <!-- Sidebar Header    -->
         <div class="sidenav-header d-flex align-items-center justify-content-center">
           <!-- User Info-->
-          <div class="sidenav-header-inner text-center"><a href="{% url 'omniparc:update-profile' %}"><img src="{{user.profile.photo_de_profile.url}}" alt="person" class="img-fluid rounded-circle"></a>
+          <div class="sidenav-header-inner text-center">
+            <a href="{% url 'omniparc:update-profile' %}">
+              {% if user.profile.photo_de_profile.url != Null %}
+                 <img src="{{user.profile.photo_de_profile.url}}" alt="person" class="img-fluid rounded-circle" />
+              {% else %}
+                 <img src="{% static 'img/profile.png' %}" alt="person" class="img-fluid rounded-circle" />
+              {% endif %}
+            </a>
             <h2 class="h5">{{user.username}}</h2><span>{{user.email}}</span>
           </div>
           <!-- Small Brand information, appears on minimized sidebar-->

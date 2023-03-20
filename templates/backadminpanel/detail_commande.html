@@ -1,7 +1,81 @@
 {% extends 'backadminpanel/base.html' %}
-
 {% load static %}
 {% block content %}
+
+
+<div class="container mt-3 col-md-12 col-lg-12 col-xl-12" >
+   <div class="card">
+       <div class="card-body">
+           <h2 class="card-title text-center"> Détail de la commande : <b>{{object.item_order_id}}</b> </h2>
+
+           <hr>
+           
+           <div class="card">
+               <div class="card-body">
+
+                  <label><b>Détails du client : </b></label>
+                  <div class="row col-lg-12">
+                     <div class="form-group col-lg-6">
+                        <label><b>Nom/Désignation du client :</b></label>
+                        <input type="text" class="form-control" value="{{object.user}}" /> 
+                     </div>
+                     <div class="form-group col-lg-6">
+                        <label><b>Profile/Type de compte :</b></label>
+                        {% if object.user.is_entreprise %}
+                            <input type="text" class="form-control" value="Compte entreprise" /> 
+                        {% else %}  
+                           <input type="text" class="form-control" value="Compte particulier" />
+                        {% endif %}
+                     </div>
+
+                  </div>
+
+                  <hr>
+                  <label><b>Détails de l'article demandé : </b></label>
+                  <div class="row col-lg-12">
+                        <div class="form-group col-lg-6">
+                           <label><b>Désignation de l'engin :</b></label>
+                           <input class="form-control" type="text" value="{{object.item.title}}" />
+                        </div>
+                        <div class="form-group col-lg-6">
+                           <label><b>Référence de l'engin :</b></label>
+                           <input class="form-control" type="text" value="{{object.item.reference}}" />
+                        </div>
+                  </div>
+                  <hr>
+
+                  <label><b>Détails de livraison : </b></label>
+                  <div class="row col-lg-12">
+                        <div class="form-group col-lg-4">
+                           <label><b>Pays : </b></label>
+                           <input class="form-control" type="text" value="{{object.addresse_livraison.get_country_display}}" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                           <label><b>Ville/Province : </b></label>
+                           <input class="form-control" type="text" value="{{object.addresse_livraison.street_address}}" />
+                        </div>
+
+                        <div class="form-group col-lg-4">
+                           <label><b>Code postal : </b></label>
+                           <input class="form-control" type="text" value="{{object.addresse_livraison.zip}}" />
+                        </div>
+                  </div>
+
+                  
+
+
+               </div>
+               <div class="card-footer">
+                  <a href="#" class="btn btn-success ml-2 float-right">Appourvé la commande</a>
+                  <a href="#" class="btn btn-warning float-right">Modifier la commande</a>
+               </div>
+            </div>
+      </div>
+   </div>
+</div>
+
+
+
 
 {{object.avec_operateur}}<br><br>
 {{object.reprise_livraison}}<br><br>

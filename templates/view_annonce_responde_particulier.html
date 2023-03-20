@@ -29,6 +29,13 @@
                       <a href="{{i.update_annonce}}" class="btn btn-warning float-right p-3">Modifier</a>
                       <a href="{{i.get_response}}" class="btn btn-primary float-right p-3">Voir les réponses</a>
                     </h6>
+                    {% if i.is_approuved %}
+                      <p class="text-muted ml-4"><b style="color: green;">Annonce approuvé</b></p>
+                    {% elif i.is_rejected %}
+                      <p class="text-muted ml-4"><b style="color: red;">Annonce rejetter </b></p>
+                    {% else %}
+                      <p class="text-muted ml-4"><b style="color: orange;">En modération</b> </p>
+                    {% endif %}
                     <p class="text-muted ml-4">{{i.created_date}}</p>
                   </div>
                 </div>
