@@ -96,6 +96,8 @@ urlpatterns = [
 
     path('faq?/',faq,name='faq'),
     path('about_us/',about_us,name='about_us'),
+    path('conditions-generals-d-utilisation/', cgu, name="cgu"),
+    path('conditions-general-de-vente/',cgv , name="cgv"),
     path('liste_entreprises/entreprise_details/<slug>/',View_ets_profile,name='entreprise_details'),
     path('Search/',search,name='Search'),
     path('confirm_devis_add_cart/<slug>/',confirm_devis_add_cart,name='confirm_devis_add_cart'),

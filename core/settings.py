@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'backend',
     'faq',
     'marketing',
+    'aide',
 
     'star_ratings',
     'django_filters',

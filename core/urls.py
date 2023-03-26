@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('marketing.urls', namespace='marketing')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('backend.urls', namespace='omniparc')),
+    path('aide/', include('aide.urls', namespace="aide")),
     path('ratings/', include('star_ratings.urls', namespace='ratings'), name='ratings'),
 
 

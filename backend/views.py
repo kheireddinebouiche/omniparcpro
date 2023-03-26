@@ -23,8 +23,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView, DetailView, View, UpdateView
 from django.views.generic.edit import FormMixin
 from marketing.forms import EmailSignUpForm
-from .forms import CheckoutForm, AddItems, UserForm, ProfileForm,  ContactForm, ItemUpdate, DevisForm, \
-    ReservationFrom, Update_commande, AnnonceForm, RespondeAnnonce, SignUpForm_particulier, SignUpForm_entreprise
+from .forms import *
 from .models import *
 from .token_generator import account_activation_token
 from .filter import ItemFilter
@@ -145,7 +144,6 @@ class CheckoutView(View):
             messages.warning(self.request, "Vous n'avez aucune commande actif pour le moment")
             return redirect("omniparc:order_summery")
 
-
 ###############################################################
 class ItemDetailView(DetailView):
     model = Item
@@ -238,8 +236,7 @@ def add_to_cart(request, slug):
             order.items.add(order_item)
             messages.info(request, "Cette article vien d'étre ajouter a votre panier")
             return redirect("omniparc:order_summery")
-
-                       
+                    
 ###############################################################################################
 @transaction.atomic
 @login_required
@@ -735,15 +732,15 @@ def successView(request):
 
 ######################################################################################
 
-def search(request):
+def search(request):    
     nom = request.GET.get('q1')
     localite = request.GET.get('q')
 
     date_min = request.GET.get('date_min')
     date_max = request.GET.get('date_max')
-
-    dd = datetime.datetime.strptime(date_min, "%Y-%m-%d").date()
-    df = datetime.datetime.strptime(date_max, "%Y-%m-%d").date()
+    
+    dd = datetime.strptime(date_min, "%Y-%m-%d").date()
+    df = datetime.strptime(date_max, "%Y-%m-%d").date()
 
     ddj = dd.day
     ddm = dd.month
@@ -898,7 +895,6 @@ class ViewDevis(DetailView):
     model = DevisItem
     template_name = 'devis.html'
 
-
 #######################################################################################
 @login_required(login_url='/accounts/login')
 def delete_devis(request, slug):
@@ -1033,7 +1029,6 @@ def update_annonce(request, slug):
 
         return render(request, 'update_annonce.html', context)
 
-
 @login_required(login_url='login')
 @transaction.atomic
 def delete_annonce(request, slug):
@@ -1098,6 +1093,13 @@ def about_us(request):
 
 def faq(request):
     return render(request, 'about_us.html')
+
+def cgu(request):
+    return render(request, 'cgu.html')
+
+def cgv(request):
+    return render(request, 'cgv.html')
+
 
 login_required(login_url='login')
 def View_ets_profile(request, slug):

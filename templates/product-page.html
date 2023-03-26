@@ -152,8 +152,8 @@
         <div class="form-group col-lg-12">
            <center> 
             <a href="{{object.signalement_item}}" class="btn btn-purple p-2"><i class="fas fa-exclamation-triangle mr-3"></i><b>Signaler l'annonce</b></a>
-            <a href="#" class="btn btn-warning p-2"><i class="far fa-user-circle mr-3"></i><b>Profile de l'annonceur</b></a>
-            <a href="#" class="btn btn-primary p-2"><i class="far fa-envelope mr-3"></i><b>Contacter par email</b></a>
+            <a href="{{object.user.profile.get_profile_details}}" class="btn btn-warning p-2"><i class="far fa-user-circle mr-3"></i><b>Profile de l'annonceur</b></a>
+            <a href="mailto:{{object.user.email}}" class="btn btn-primary p-2"><i class="far fa-envelope mr-3"></i><b>Contacter par email</b></a>
           
           </center>
         </div>
